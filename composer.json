@@ -1,0 +1,14 @@
+{
+    "name": "stellarwp/helix",
+    "description": "An API for approachable data access in WordPress",
+    "type": "library",
+    "homepage": "https://stellarwp.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "StellarWP",
+            "email": "support@theeventscalendar.com"
+        }
+    ],
+    "require": {}
+}
