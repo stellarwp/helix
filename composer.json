@@ -14,9 +14,10 @@
         }
     ],
     "require": {},
+    "require-dev": {},
     "autoload": {
         "psr-4": {
-            "StellarWP\\": "src/"
+            "StellarWP\\Helix\\": "src/"
         }
     }
 }
