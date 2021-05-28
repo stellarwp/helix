@@ -7,6 +7,7 @@
 * Tribe__Timezones
 * tribe_is_regex
 * tribe_unfenced_regex
+* tribe_upload_image
 * Tribe__Terms
 * Tribe__Log
 * tribe( 'logger' )
