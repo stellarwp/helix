@@ -268,8 +268,8 @@ abstract class Decorator implements Interface {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function save( $return_promise = true ) {
-		$this->decorated->save( $return_promise );
+	public function save() {
+		$this->decorated->save();
 	}
 
 	/**
@@ -393,15 +393,8 @@ abstract class Decorator implements Interface {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function delete( $return_promise = false ) {
-		return $this->decorated->delete( $return_promise );
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function async_delete( array $to_delete, $return_promise = true ) {
-		return $this->decorated->async_delete( $to_delete, $return_promise );
+	public function delete() {
+		return $this->decorated->delete();
 	}
 
 	/**
@@ -409,13 +402,6 @@ abstract class Decorator implements Interface {
 	 */
 	public function add_update_field_alias( $alias, $field_name ) {
 		$this->decorated->add_update_field_alias( $alias, $field_name );
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function async_update( array $to_update, $return_promise = true ) {
-		return $this->decorated->async_update( $to_update, $return_promise );
 	}
 
 	/**

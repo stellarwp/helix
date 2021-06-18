@@ -4,6 +4,7 @@ namespace StellarWP\Helix;
 use StellarWP\Helix\Traits\With_Meta_Updates_Handling;
 use StellarWP\Helix\Traits\With_Post_Attribute_Detection;
 use Tribe__Utils__Array as Arr;
+use StellarWP\Helix\Utils\Regex;
 
 abstract class Repository implements Repository\Interface {
 	use With_Meta_Updates_Handling;
@@ -1327,11 +1328,11 @@ abstract class Repository implements Repository\Interface {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function save( $return_promise = false ) {
+	public function save() {
 		$to_update = $this->get_ids();
 
 		if ( empty( $to_update ) ) {
-			return $return_promise ? new Tribe__Promise() : [];
+			return [];
 		}
 
 		$exit     = [];
@@ -1344,11 +1345,20 @@ abstract class Repository implements Repository\Interface {
 		// If any `filter_postarr_for_update` call returned a falsy value then drop it.
 		$postarrs = array_filter( $postarrs );
 
-		if (
-			$this->is_background_update_active( $to_update )
-			&& count( $to_update ) > $this->get_background_update_threshold( $to_update )
-		) {
-			return $this->async_update( $postarrs, true );
+		/**
+		 * Add the ability to inject alternate update handling rather than the default.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param null|mixed $pre_update_return Return value for update. NULL allows default update handling.
+		 * @param array $to_update IDs to update.
+		 * @param array $postarrs WP_Posts indexed by post id.
+		 * @param Repository $this_object Repository instance.
+		 */
+		$pre_update_return = apply_filters( 'helix_save_pre_update_callback', null, $to_update, $postarrs, $this );
+
+		if ( null !== $pre_update_return ) {
+			return $pre_update_return;
 		}
 
 		$update_callback = $this->get_update_callback( $to_update, false );
@@ -1358,7 +1368,7 @@ abstract class Repository implements Repository\Interface {
 			$exit[ $id ] = $id === $this_exit ? true : $this_exit;
 		}
 
-		return $return_promise ? new Tribe__Promise : $exit;
+		return $exit;
 	}
 
 	/**
@@ -1891,9 +1901,9 @@ abstract class Repository implements Repository\Interface {
 			case 'meta_regexp':
 			case 'meta_equals_regexp':
 				// Check if Regexp is fenced.
-				if ( tribe_is_regex( $arg_1 ) ) {
+				if ( Regex::is_regex( $arg_1 ) ) {
 					// Unfence the Regexp.
-					$arg_1 = tribe_unfenced_regex( $arg_1 );
+					$arg_1 = Regex::unfenced_regex( $arg_1 );
 				}
 
 				$args = $this->build_meta_query( $meta_key = $value, $meta_value = $arg_1, 'REGEXP' );
@@ -1901,9 +1911,9 @@ abstract class Repository implements Repository\Interface {
 			case 'meta_not_regexp':
 			case 'meta_not_equals_regexp':
 				// Check if Regexp is fenced.
-				if ( tribe_is_regex( $arg_1 ) ) {
+				if ( Regex::is_regex( $arg_1 ) ) {
 					// Unfence the Regexp.
-					$arg_1 = tribe_unfenced_regex( $arg_1 );
+					$arg_1 = Regex::unfenced_regex( $arg_1 );
 				}
 
 				$args = $this->build_meta_query( $meta_key = $value, $meta_value = $arg_1, 'NOT REGEXP' );
@@ -1913,11 +1923,11 @@ abstract class Repository implements Repository\Interface {
 				$compare = 'LIKE';
 
 				// Check if Regexp is fenced (the only way for Regexp to be supported in this context).
-				if ( tribe_is_regex( $arg_1 ) ) {
+				if ( Regex::is_regex( $arg_1 ) ) {
 					$compare = 'REGEXP';
 
 					// Unfence the Regexp.
-					$arg_1 = tribe_unfenced_regex( $arg_1 );
+					$arg_1 = Regex::unfenced_regex( $arg_1 );
 				}
 
 				$args = $this->build_meta_query( $meta_key = $value, $meta_value = $arg_1, $compare );
@@ -1927,11 +1937,11 @@ abstract class Repository implements Repository\Interface {
 				$compare = 'NOT LIKE';
 
 				// Check if Regexp is fenced (the only way for Regexp to be supported in this context).
-				if ( tribe_is_regex( $arg_1 ) ) {
+				if ( Regex::is_regex( $arg_1 ) ) {
 					$compare = 'NOT REGEXP';
 
 					// Unfence the Regexp.
-					$arg_1 = tribe_unfenced_regex( $arg_1 );
+					$arg_1 = Regex::unfenced_regex( $arg_1 );
 				}
 
 				$args = $this->build_meta_query( $meta_key = $value, $meta_value = $arg_1, $compare );
@@ -2439,13 +2449,8 @@ abstract class Repository implements Repository\Interface {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function delete( $return_promise = false ) {
+	public function delete() {
 		$to_delete = $this->get_ids();
-
-		if ( empty( $to_delete ) ) {
-			return $return_promise ? new Tribe__Promise() : [];
-		}
-
 
 		/**
 		 * Filters the post delete operation allowing third party code to bail out of
@@ -2459,13 +2464,6 @@ abstract class Repository implements Repository\Interface {
 		$deleted = apply_filters( "stellar_repository_{$this->filter_name}_delete", null, $to_delete );
 		if ( null !== $deleted ) {
 			return $deleted;
-		}
-
-		if (
-			$this->is_background_delete_active( $to_delete )
-			&& count( $to_delete ) > $this->get_background_delete_threshold( $to_delete )
-		) {
-			return $this->async_delete( $to_delete, $return_promise );
 		}
 
 		$delete_callback = $this->get_delete_callback( $to_delete );
@@ -2484,7 +2482,7 @@ abstract class Repository implements Repository\Interface {
 			$deleted[] = $id;
 		}
 
-		return $return_promise ? new Tribe__Promise() : $deleted;
+		return $deleted;
 	}
 
 	/**
@@ -2663,23 +2661,6 @@ abstract class Repository implements Repository\Interface {
 		return $background_threshold;
 	}
 
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function async_delete( array $to_delete, $return_promise = true ) {
-		$promise = new Tribe__Promise( $this->get_delete_callback( $to_delete, true ), $to_delete );
-		if ( ! $return_promise ) {
-			// Dispatch it immediately and return the IDs that will be deleted.
-			$promise->save()->dispatch();
-
-			return $to_delete;
-		}
-
-		// Return the promise and let the client do the dispatching.
-		return $promise;
-	}
-
 	/**
 	 * Returns the delete callback function or method to use to delete posts.
 	 *
@@ -2775,22 +2756,6 @@ abstract class Repository implements Repository\Interface {
 		);
 
 		return $callback;
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function async_update( array $to_update, $return_promise = true ) {
-		$promise = new Tribe__Promise( $this->get_update_callback( $to_update, true ), $to_update );
-		if ( ! $return_promise ) {
-			// Dispatch it immediately and return the IDs that will be deleted.
-			$promise->save()->dispatch();
-
-			return $to_update;
-		}
-
-		// Return the promise and let the client do the dispatching.
-		return $promise;
 	}
 
 	/**
