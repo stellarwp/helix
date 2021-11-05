@@ -9,7 +9,7 @@
 
 namespace StellarWP\Helix\Repository;
 
-use Tribe__Utils__Array as Arr;
+use StellarWP\Helix\Utils\Array_Utils as Arr;
 
 trait Filter_Validation {
 	/**

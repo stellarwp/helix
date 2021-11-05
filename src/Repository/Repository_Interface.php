@@ -7,7 +7,7 @@ namespace StellarWP\Helix\Repository;
  * @since 4.7.19
  *
  */
-interface Interface extends Read_Interface, Update_Interface {
+interface Repository_Interface extends Read_Interface, Update_Interface {
 
 	const PERMISSION_EDITABLE = 'editable';
 	const PERMISSION_READABLE = 'readable';

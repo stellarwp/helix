@@ -1,12 +1,13 @@
 <?php
 namespace StellarWP\Helix;
 
+use StellarWP\Helix\Repository\Repository_Interface;
 use StellarWP\Helix\Traits\With_Meta_Updates_Handling;
 use StellarWP\Helix\Traits\With_Post_Attribute_Detection;
-use Tribe__Utils__Array as Arr;
+use StellarWP\Helix\Utils\Array_Utils as Arr;
 use StellarWP\Helix\Utils\Regex;
 
-abstract class Repository implements Repository\Interface {
+abstract class Repository implements Repository_Interface {
 	use With_Meta_Updates_Handling;
 	use With_Post_Attribute_Detection;
 
@@ -440,7 +441,7 @@ abstract class Repository implements Repository\Interface {
 	public function __construct() {
 		$this->filter_query = new Repository\Query_Filters();
 		$this->default_args = array_merge( [ 'posts_per_page' => -1 ], $this->default_args );
-		$post_types         = (array) Tribe__Utils__Array::get( $this->default_args, 'post_type', [] );
+		$post_types         = (array) Arr::get( $this->default_args, 'post_type', [] );
 		$this->taxonomies   = get_taxonomies( [ 'object_type' => $post_types ], 'names' );
 
 		/**
@@ -727,7 +728,7 @@ abstract class Repository implements Repository\Interface {
 		 * query var to have a fallback should the LIMIT cause proving difficult to filter.
 		 */
 		$this->query_args['offset'] = $increment
-			? absint( $offset ) + (int) Tribe__Utils__Array::get( $this->query_args, 'offset', 0 )
+			? absint( $offset ) + (int) Arr::get( $this->query_args, 'offset', 0 )
 			: absint( $offset );
 
 		return $this;
@@ -951,7 +952,7 @@ abstract class Repository implements Repository\Interface {
 	 * {@inheritdoc}
 	 */
 	public function nth( $n ) {
-		$per_page = (int) Tribe__Utils__Array::get_in_any( [
+		$per_page = (int) Arr::get_in_any( [
 			$this->query_args,
 			$this->default_args,
 		], 'posts_per_page', get_option( 'posts_per_page' ) );
@@ -989,7 +990,7 @@ abstract class Repository implements Repository\Interface {
 	public function apply_modifier( $key, $value = null ) {
 		$call_args = func_get_args();
 
-		$application = Tribe__Utils__Array::get( $this->schema, $key, null );
+		$application = Arr::get( $this->schema, $key, null );
 
 		/**
 		 * Return primitives, including `null`, as they are.
@@ -1069,7 +1070,7 @@ abstract class Repository implements Repository\Interface {
 
 		$simple_meta = $this->simple_meta_schema[ $filter ];
 
-		$by = Tribe__Utils__Array::get( $simple_meta, 'by', 'meta_regexp_or_like' );
+		$by = Arr::get( $simple_meta, 'by', 'meta_regexp_or_like' );
 
 		$this->by( $by, $simple_meta['meta_key'], $value );
 	}
@@ -1090,7 +1091,7 @@ abstract class Repository implements Repository\Interface {
 
 		$simple_tax = $this->simple_tax_schema[ $filter ];
 
-		$by = Tribe__Utils__Array::get( $simple_tax, 'by', 'term_in' );
+		$by = Arr::get( $simple_tax, 'by', 'term_in' );
 
 		$this->by( $by, $simple_tax['taxonomy'], $value );
 	}
@@ -1552,7 +1553,7 @@ abstract class Repository implements Repository\Interface {
 	 * @throws Repository\Usage_Error If the comparison operator requires
 	 */
 	public function where_meta_related_by( $meta_keys, $compare, $field = null, $values = null ) {
-		$meta_keys = Tribe__Utils__Array::list_to_array( $meta_keys );
+		$meta_keys = Arr::list_to_array( $meta_keys );
 
 		if ( ! in_array( $compare, [ 'EXISTS', 'NOT EXISTS' ], true ) ) {
 			if ( empty( $field ) || empty( $values ) ) {
@@ -1610,7 +1611,7 @@ abstract class Repository implements Repository\Interface {
 	 * @return $this
 	 */
 	public function where_meta_related_by_meta( $meta_keys, $compare, $meta_field = null, $meta_values = null, $or_not_exists = false ) {
-		$meta_keys = Tribe__Utils__Array::list_to_array( $meta_keys );
+		$meta_keys = Arr::list_to_array( $meta_keys );
 
 		if ( ! in_array( $compare, [ 'EXISTS', 'NOT EXISTS' ], true ) ) {
 			if ( empty( $meta_field ) || empty( $meta_values ) ) {
@@ -2085,9 +2086,9 @@ abstract class Repository implements Repository\Interface {
 	 *                                        comparison operator.
 	 */
 	protected function build_meta_query( $meta_key, $meta_value = 'value', $compare = '=', $type_or_format = null ) {
-		$meta_keys = Tribe__Utils__Array::list_to_array( $meta_key );
+		$meta_keys = Arr::list_to_array( $meta_key );
 
-		$postfix = Tribe__Utils__Array::get( self::$comparison_operators, $compare, '' );
+		$postfix = Arr::get( self::$comparison_operators, $compare, '' );
 
 		if ( count( $meta_keys ) === 1 ) {
 			$array_key = $this->sql_slug( $meta_keys[0], $postfix );
@@ -2133,7 +2134,7 @@ abstract class Repository implements Repository\Interface {
 		$this->validate_operator_and_values( $compare, $meta_keys, $meta_value );
 
 		if ( in_array( $compare, self::$multi_value_keys, true ) ) {
-			$meta_values = $this->prepare_interval( Tribe__Utils__Array::list_to_array( $meta_value ), $type_or_format );
+			$meta_values = $this->prepare_interval( Arr::list_to_array( $meta_value ), $type_or_format );
 		} else {
 			$meta_values = $this->prepare_value( $meta_value, $type_or_format );
 		}
@@ -2163,7 +2164,7 @@ abstract class Repository implements Repository\Interface {
 
 		foreach ( $frags as &$frag ) {
 			if ( is_string( $frag ) ) {
-				Tribe__Utils__Array::get( self::$comparison_operators, $frag, $frag );
+				Arr::get( self::$comparison_operators, $frag, $frag );
 			} elseif ( is_array( $frag ) ) {
 				$frag = implode( '_', $frag );
 			}
@@ -2245,7 +2246,7 @@ abstract class Repository implements Repository\Interface {
 	 * @return string
 	 */
 	public function prepare_interval( $values, $format = '%s', $operator = 'IN' ) {
-		$values = Tribe__Utils__Array::list_to_array( $values );
+		$values = Arr::list_to_array( $values );
 
 		$prepared = [];
 		foreach ( $values as $value ) {
@@ -2861,7 +2862,7 @@ abstract class Repository implements Repository\Interface {
 			}
 
 			// Allow fields to be aliased
-			$key = Tribe__Utils__Array::get( $this->update_fields_aliases, $key, $key );
+			$key = Arr::get( $this->update_fields_aliases, $key, $key );
 
 			if ( ! $this->can_be_updated( $key ) ) {
 				throw Repository\Usage_Error::because_this_field_cannot_be_updated( $key, $this );
@@ -2876,7 +2877,7 @@ abstract class Repository implements Repository\Interface {
 			} elseif ( $this->is_a_taxonomy( $key ) ) {
 				$taxonomy = get_taxonomy( $key );
 				if ( $taxonomy instanceof WP_Taxonomy ) {
-					$postarr['tax_input'][ $key ] = Tribe__Utils__Array::list_to_array( $value );
+					$postarr['tax_input'][ $key ] = Arr::list_to_array( $value );
 				}
 			} else {
 				// it's a custom field
@@ -2969,7 +2970,7 @@ abstract class Repository implements Repository\Interface {
 			$default_value = $default;
 		}
 
-		return Tribe__Utils__Array::get( $postarr['meta_input'], $key, $default_value );
+		return Arr::get( $postarr['meta_input'], $key, $default_value );
 	}
 
 	/**
@@ -3088,7 +3089,7 @@ abstract class Repository implements Repository\Interface {
 			$default_post_status[] = 'draft';
 		}
 
-		$query_args['post_status'] = Tribe__Utils__Array::get( $query_args, 'post_status', $default_post_status );
+		$query_args['post_status'] = Arr::get( $query_args, 'post_status', $default_post_status );
 
 		/**
 		 * Filters the query arguments that will be used to fetch the posts.
@@ -3113,13 +3114,13 @@ abstract class Repository implements Repository\Interface {
 		$filtered_offset = apply_filters( 'stellar_repository_query_arg_offset_override', null, $query_args );
 
 		if ( $filtered_offset || isset( $query_args['offset'] ) ) {
-			$per_page = (int) Tribe__Utils__Array::get( $query_args, 'posts_per_page', get_option( 'posts_per_page' ) );
+			$per_page = (int) Arr::get( $query_args, 'posts_per_page', get_option( 'posts_per_page' ) );
 
 			if ( $filtered_offset ) {
 				$query_args['offset'] = $filtered_offset;
 			} elseif ( isset( $query_args['offset'] ) ) {
 				$offset = absint( $query_args['offset'] );
-				$page   = (int) Tribe__Utils__Array::get( $query_args, 'paged', 1 );
+				$page   = (int) Arr::get( $query_args, 'paged', 1 );
 
 				$real_offset          = $per_page === -1 ? $offset : ( $per_page * ( $page - 1 ) ) + $offset;
 				$query_args['offset'] = $real_offset;
@@ -3194,8 +3195,8 @@ abstract class Repository implements Repository\Interface {
 			);
 		}
 
-		Tribe__Utils__Array::recursive_ksort( $filters );
-		Tribe__Utils__Array::recursive_ksort( $query_vars );
+		Arr::recursive_ksort( $filters );
+		Arr::recursive_ksort( $query_vars );
 
 		return [ 'filters' => $filters, 'query_vars' => $query_vars ];
 	}

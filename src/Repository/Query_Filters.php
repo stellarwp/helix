@@ -1,6 +1,9 @@
 <?php
 namespace StellarWP\Helix\Repository;
 
+use StellarWP\Helix\Utils\Array_Utils as Arr;
+use WP_Query;
+
 /**
  * Class Query_Filters
  *
@@ -96,8 +99,8 @@ class Query_Filters {
 	 * @return array
 	 */
 	public static function meta_not_in( $meta_keys, $values, $query_slug ) {
-		$meta_keys = Tribe__Utils__Array::list_to_array( $meta_keys );
-		$values    = Tribe__Utils__Array::list_to_array( $values );
+		$meta_keys = Arr::list_to_array( $meta_keys );
+		$values    = Arr::list_to_array( $values );
 
 		if ( empty( $meta_keys ) || count( $values ) === 0 ) {
 			return [];
@@ -150,8 +153,8 @@ class Query_Filters {
 	 * @return array
 	 */
 	public static function meta_in( $meta_keys, $values, $query_slug ) {
-		$meta_keys = Tribe__Utils__Array::list_to_array( $meta_keys );
-		$values    = Tribe__Utils__Array::list_to_array( $values );
+		$meta_keys = Arr::list_to_array( $meta_keys );
+		$values    = Arr::list_to_array( $values );
 
 		if ( empty( $meta_keys ) || count( $values ) === 0 ) {
 			return [];
@@ -195,7 +198,7 @@ class Query_Filters {
 	 * @return array
 	 */
 	public static function meta_exists( $meta_keys, $query_slug ) {
-		$meta_keys = Tribe__Utils__Array::list_to_array( $meta_keys );
+		$meta_keys = Arr::list_to_array( $meta_keys );
 
 		if ( empty( $meta_keys ) ) {
 			return [];
@@ -232,8 +235,8 @@ class Query_Filters {
 	 * @return array
 	 */
 	public static function meta_in_or_not_exists( $meta_keys, $values, $query_slug ) {
-		$meta_keys = Tribe__Utils__Array::list_to_array( $meta_keys );
-		$values    = Tribe__Utils__Array::list_to_array( $values );
+		$meta_keys = Arr::list_to_array( $meta_keys );
+		$values    = Arr::list_to_array( $values );
 
 		if ( empty( $meta_keys ) || count( $values ) === 0 ) {
 			return [];
@@ -284,8 +287,8 @@ class Query_Filters {
 	 * @return array
 	 */
 	public static function meta_not_in_or_not_exists( $meta_keys, $values, $query_slug ) {
-		$meta_keys = Tribe__Utils__Array::list_to_array( $meta_keys );
-		$values    = Tribe__Utils__Array::list_to_array( $values );
+		$meta_keys = Arr::list_to_array( $meta_keys );
+		$values    = Arr::list_to_array( $values );
 
 		if ( empty( $meta_keys ) || count( $values ) === 0 ) {
 			return [];
