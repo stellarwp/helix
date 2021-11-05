@@ -1,11 +1,13 @@
 <?php
 namespace StellarWP\Helix;
 
+use DateTime;
+use DateTimeZone;
 use StellarWP\Helix\Repository\Repository_Interface;
 use StellarWP\Helix\Traits\With_Meta_Updates_Handling;
 use StellarWP\Helix\Traits\With_Post_Attribute_Detection;
+use StellarWP\Helix\Utils;
 use StellarWP\Helix\Utils\Array_Utils as Arr;
-use StellarWP\Helix\Utils\Regex;
 
 abstract class Repository implements Repository_Interface {
 	use With_Meta_Updates_Handling;
@@ -1136,7 +1138,7 @@ abstract class Repository implements Repository_Interface {
 			if ( ! ( is_object( $query_modifier ) || is_callable( $query_modifier ) ) ) {
 
 				if ( ! is_array( $query_modifier ) ) {
-					throw new InvalidArgumentException( 'Query modifier should be an array!' );
+					throw new \InvalidArgumentException( 'Query modifier should be an array!' );
 				}
 
 				$replace_modifiers = in_array( $key, $this->replacing_modifiers(), true );
@@ -1161,7 +1163,7 @@ abstract class Repository implements Repository_Interface {
 				 */
 				$this->query_modifiers[] = $query_modifier;
 			}
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			/**
 			 * We allow for the `apply` method to orderly fail to micro-optimize.
 			 * If applying one parameter would yield no results then let's immediately bail.
@@ -1456,9 +1458,9 @@ abstract class Repository implements Repository_Interface {
 	 */
 	protected function update_postarr_dates( $key, $value, array &$postarr ) {
 		if ( array_key_exists( $key, $this->to_gmt_map ) ) {
-			$postarr[ $this->to_gmt_map[ $key ] ] = Tribe__Timezones::to_tz( $value, 'UTC' );
+			$postarr[ $this->to_gmt_map[ $key ] ] = Utils\Timezones::to_tz( $value, 'UTC' );
 		} elseif ( array_key_exists( $key, $this->to_local_time_map ) ) {
-			$postarr[ $this->to_local_time_map[ $key ] ] = Tribe__Timezones::to_tz( $value, Tribe__Timezones::wp_timezone_string() );
+			$postarr[ $this->to_local_time_map[ $key ] ] = Utils\Timezones::to_tz( $value, Utils\Timezones::wp_timezone_string() );
 		}
 		$postarr[ $key ] = $value;
 	}
@@ -1902,9 +1904,9 @@ abstract class Repository implements Repository_Interface {
 			case 'meta_regexp':
 			case 'meta_equals_regexp':
 				// Check if Regexp is fenced.
-				if ( Regex::is_regex( $arg_1 ) ) {
+				if ( Utils\Regex::is_regex( $arg_1 ) ) {
 					// Unfence the Regexp.
-					$arg_1 = Regex::unfenced_regex( $arg_1 );
+					$arg_1 = Utils\Regex::unfenced_regex( $arg_1 );
 				}
 
 				$args = $this->build_meta_query( $meta_key = $value, $meta_value = $arg_1, 'REGEXP' );
@@ -1912,9 +1914,9 @@ abstract class Repository implements Repository_Interface {
 			case 'meta_not_regexp':
 			case 'meta_not_equals_regexp':
 				// Check if Regexp is fenced.
-				if ( Regex::is_regex( $arg_1 ) ) {
+				if ( Utils\Regex::is_regex( $arg_1 ) ) {
 					// Unfence the Regexp.
-					$arg_1 = Regex::unfenced_regex( $arg_1 );
+					$arg_1 = Utils\Regex::unfenced_regex( $arg_1 );
 				}
 
 				$args = $this->build_meta_query( $meta_key = $value, $meta_value = $arg_1, 'NOT REGEXP' );
@@ -1924,11 +1926,11 @@ abstract class Repository implements Repository_Interface {
 				$compare = 'LIKE';
 
 				// Check if Regexp is fenced (the only way for Regexp to be supported in this context).
-				if ( Regex::is_regex( $arg_1 ) ) {
+				if ( Utils\Regex::is_regex( $arg_1 ) ) {
 					$compare = 'REGEXP';
 
 					// Unfence the Regexp.
-					$arg_1 = Regex::unfenced_regex( $arg_1 );
+					$arg_1 = Utils\Regex::unfenced_regex( $arg_1 );
 				}
 
 				$args = $this->build_meta_query( $meta_key = $value, $meta_value = $arg_1, $compare );
@@ -1938,11 +1940,11 @@ abstract class Repository implements Repository_Interface {
 				$compare = 'NOT LIKE';
 
 				// Check if Regexp is fenced (the only way for Regexp to be supported in this context).
-				if ( Regex::is_regex( $arg_1 ) ) {
+				if ( Utils\Regex::is_regex( $arg_1 ) ) {
 					$compare = 'NOT REGEXP';
 
 					// Unfence the Regexp.
-					$arg_1 = Regex::unfenced_regex( $arg_1 );
+					$arg_1 = Utils\Regex::unfenced_regex( $arg_1 );
 				}
 
 				$args = $this->build_meta_query( $meta_key = $value, $meta_value = $arg_1, $compare );
@@ -1981,17 +1983,17 @@ abstract class Repository implements Repository_Interface {
 				$args = $this->build_tax_query( $taxonomy = $value, $terms = $arg_1, 'slug', 'AND' );
 				break;
 			case 'term_in':
-				$arg_1 = Tribe__Terms::translate_terms_to_ids( $arg_1, $value, false );
+				$arg_1 = Utils\Terms::translate_terms_to_ids( $arg_1, $value, false );
 
 				$args = $this->build_tax_query( $taxonomy = $value, $terms = $arg_1, 'term_id', 'IN' );
 				break;
 			case 'term_not_in':
-				$arg_1 = Tribe__Terms::translate_terms_to_ids( $arg_1, $value, false );
+				$arg_1 = Utils\Terms::translate_terms_to_ids( $arg_1, $value, false );
 
 				$args = $this->build_tax_query( $taxonomy = $value, $terms = $arg_1, 'term_id', 'NOT IN' );
 				break;
 			case 'term_and':
-				$arg_1 = Tribe__Terms::translate_terms_to_ids( $arg_1, $value, false );
+				$arg_1 = Utils\Terms::translate_terms_to_ids( $arg_1, $value, false );
 
 				$args = $this->build_tax_query( $taxonomy = $value, $terms = $arg_1, 'term_id', 'AND' );
 				break;
@@ -2014,7 +2016,7 @@ abstract class Repository implements Repository_Interface {
 	protected function get_posts_after( $value, $column = 'post_date' ) {
 		$timezone = in_array( $column, [ 'post_date_gmt', 'post_modified_gmt' ], true )
 			? 'UTC'
-			: Tribe__Timezones::generate_timezone_string_from_utc_offset( Tribe__Timezones::wp_timezone_string() );
+			: Utils\Timezones::generate_timezone_string_from_utc_offset( Utils\Timezones::wp_timezone_string() );
 
 		if ( is_numeric( $value ) ) {
 			$value = "@{$value}";
@@ -2049,7 +2051,7 @@ abstract class Repository implements Repository_Interface {
 	protected function get_posts_before( $value, $column = 'post_date' ) {
 		$timezone = in_array( $column, [ 'post_date_gmt', 'post_modified_gmt' ], true )
 			? 'UTC'
-			: Tribe__Timezones::generate_timezone_string_from_utc_offset( Tribe__Timezones::wp_timezone_string() );
+			: Utils\Timezones::generate_timezone_string_from_utc_offset( Utils\Timezones::wp_timezone_string() );
 
 		if ( is_numeric( $value ) ) {
 			$value = "@{$value}";
@@ -2473,9 +2475,9 @@ abstract class Repository implements Repository_Interface {
 			$done = $delete_callback( $id );
 
 			if ( empty( $done ) ) {
-				tribe( 'logger' )->log(
+				Utils\Log::log(
 					__( 'Could not delete post with ID ' . $id, 'tribe-common' ),
-					Tribe__Log::WARNING,
+					Utils\Log::WARNING,
 					$this->filter_name
 				);
 				continue;
@@ -2799,7 +2801,7 @@ abstract class Repository implements Repository_Interface {
 	 * @param string $message The error message.
 	 */
 	public function cast_error_to_exception( $code, $message ) {
-		throw new RuntimeException( $message, $code );
+		throw new \RuntimeException( $message, $code );
 	}
 
 	/**
@@ -2817,7 +2819,7 @@ abstract class Repository implements Repository_Interface {
 
 		$post = $this->format_item( $created );
 
-		return $post instanceof WP_Post && $post->ID === $created ? $post : false;
+		return $post instanceof \WP_Post && $post->ID === $created ? $post : false;
 	}
 
 	/**
@@ -2876,7 +2878,7 @@ abstract class Repository implements Repository_Interface {
 				}
 			} elseif ( $this->is_a_taxonomy( $key ) ) {
 				$taxonomy = get_taxonomy( $key );
-				if ( $taxonomy instanceof WP_Taxonomy ) {
+				if ( $taxonomy instanceof \WP_Taxonomy ) {
 					$postarr['tax_input'][ $key ] = Arr::list_to_array( $value );
 				}
 			} else {
@@ -3011,7 +3013,7 @@ abstract class Repository implements Repository_Interface {
 	 * {@inheritdoc}
 	 */
 	public function pluck( $field ) {
-		$list = new WP_List_Util( $this->all() );
+		$list = new \WP_List_Util( $this->all() );
 
 		return $list->pluck( $field );
 	}
@@ -3020,7 +3022,7 @@ abstract class Repository implements Repository_Interface {
 	 * {@inheritdoc}
 	 */
 	public function filter( $args = [], $operator = 'AND' ) {
-		$list = new WP_List_Util( $this->all() );
+		$list = new \WP_List_Util( $this->all() );
 
 		return $list->filter( $args, $operator );
 	}
@@ -3029,7 +3031,7 @@ abstract class Repository implements Repository_Interface {
 	 * {@inheritdoc}
 	 */
 	public function sort( $orderby = [], $order = 'ASC', $preserve_keys = false ) {
-		$list = new WP_List_Util( $this->all() );
+		$list = new \WP_List_Util( $this->all() );
 
 		return $list->sort( $orderby, $order, $preserve_keys );
 	}
@@ -3068,10 +3070,10 @@ abstract class Repository implements Repository_Interface {
 	 *
 	 * @since 4.9.5
 	 *
-	 * @return WP_Query The built query object.
+	 * @return \WP_Query The built query object.
 	 */
 	protected function build_query_internally() {
-		$query = new WP_Query();
+		$query = new \WP_Query();
 
 		$query->builder = $this;
 
@@ -3160,14 +3162,14 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function hash( array $settings = [], WP_Query $query = null ) {
+	public function hash( array $settings = [], \WP_Query $query = null ) {
 		return md5( json_encode( $this->get_hash_data( $settings, $query ) ) );
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function get_hash_data( array $settings, WP_Query $query = null ) {
+	public function get_hash_data( array $settings, \WP_Query $query = null ) {
 		$filters    = $this->current_filters;
 		$query_vars = null !== $query
 			? $query->query
@@ -3566,9 +3568,9 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function set_query( WP_Query $query ) {
+	public function set_query( \WP_Query $query ) {
 		if (
-			$this->last_built_query instanceof WP_Query
+			$this->last_built_query instanceof \WP_Query
 			&& !empty($this->last_built_query->request)
 		){
 			throw Repository\Usage_Error::because_query_cannot_be_set_after_it_ran();
