@@ -14,11 +14,11 @@ class Array_Utils {
 	 * 
 	 * @since 1.0.0
 	 *
-	 * @param mixed		$array The array containing the key this sets.
+	 * @param mixed        $array The array containing the key this sets.
 	 * @param string|array $key To set a key nested multiple levels deep pass an array
-	 *							 specifying each key in order as a value.
-		*							 Example: array( 'lvl1', 'lvl2', 'lvl3' );
-		* @param mixed		$value The value.
+	 *                          specifying each key in order as a value.
+		*                         Example: array( 'lvl1', 'lvl2', 'lvl3' );
+		* @param mixed       $value The value.
 		*
 		* @return array Full array with the key set to the specified value.
 		*/
@@ -65,13 +65,13 @@ class Array_Utils {
 	 * 
 	 * @since 1.0.0
 	 *
-	 * @param array		$variable Array or object to search within.
-	 * @param array|string $indexes Specify each nested index in order.
-	 *								Example: array( 'lvl1', 'lvl2' );
-		* @param mixed		$default Default value if the search finds nothing.
-		*
-		* @return mixed The value of the specified index or the default if not found.
-		*/
+	 * @param array        $variable Array or object to search within.
+	 * @param array|string $indexes  Specify each nested index in order.
+	 *                               Example: array( 'lvl1', 'lvl2' );
+	 * @param mixed        $default  Default value if the search finds nothing.
+	 *
+	 * @return mixed The value of the specified index or the default if not found.
+	 */
 	public static function get( $variable, $indexes, $default = null ) {
 		if ( is_object( $variable ) ) {
 			$variable = (array) $variable;
@@ -101,13 +101,13 @@ class Array_Utils {
 	 * Example: get( [$a, $b, $c], [ 0, 1, 2 ] ) returns the value of $a[0][1][2] found in $a, $b or $c
 	 * or the default.
 	 *
-	 * @param array		$variables Array of arrays or objects to search within.
-	 * @param array|string $indexes Specify each nested index in order.
-	 *								 Example: array( 'lvl1', 'lvl2' );
-		* @param mixed		$default Default value if the search finds nothing.
-		*
-		* @return mixed The value of the specified index or the default if not found.
-		*/
+	 * @param array        $variables Array of arrays or objects to search within.
+	 * @param array|string $indexes   Specify each nested index in order.
+	 *                                Example: array( 'lvl1', 'lvl2' );
+	 * @param mixed        $default   Default value if the search finds nothing.
+	 *
+	 * @return mixed The value of the specified index or the default if not found.
+	 */
 	public static function get_in_any( array $variables, $indexes, $default = null ) {
 		foreach ( $variables as $variable ) {
 			$found = self::get( $variable, $indexes, '__not_found__' );
@@ -124,9 +124,9 @@ class Array_Utils {
 	 * 
 	 * @since 1.0.0
 	 *
-	 * @param string	   $haystack String to search in.
-	 * @param array|string $needles Strings to search for.
-	 * @param int		  $offset Starting position of search.
+	 * @param string       $haystack String to search in.
+	 * @param array|string $needles  Strings to search for.
+	 * @param int          $offset   Starting position of search.
 	 *
 	 * @return false|int Integer position of first needle occurrence.
 	 * @see strpos()
@@ -240,13 +240,13 @@ class Array_Utils {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param mixed $array The array whose keys should be duplicated.
+	 * @param mixed $array     The array whose keys should be duplicated.
 	 * @param bool  $recursive Whether the un-prefixing and duplication should be
-	 *						 recursive or shallow.
-		*
-		* @return array The array with the duplicate, unprefixed, keys or the
-		*			   original input if not an array.
-		*/
+	 *                         recursive or shallow.
+	 *
+	 * @return array The array with the duplicate, unprefixed, keys or the
+	 *               original input if not an array.
+	 */
 	public static function add_unprefixed_keys_to( $array, $recursive = false ) {
 		if ( ! is_array( $array ) ) {
 			return $array;
@@ -276,13 +276,13 @@ class Array_Utils {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param mixed $array The array whose keys should be duplicated.
+	 * @param mixed $array     The array whose keys should be duplicated.
 	 * @param bool  $recursive Whether the prefixing and duplication should be
-	 *						 recursive or shallow.
-		*
-		* @return array The array with the duplicate, prefixed, keys or the
-		*			   original input if not an array.
-		*/
+	 *                         recursive or shallow.
+	 *
+	 * @return array The array with the duplicate, prefixed, keys or the
+	 *               original input if not an array.
+	 */
 	public static function add_prefixed_keys_to( $array, $recursive = false ) {
 		if ( ! is_array( $array ) ) {
 			return $array;
@@ -331,11 +331,11 @@ class Array_Utils {
 	 * @since 1.0.0
 	 *
 	 * @param array<int|string,mixed> $input  The input array whose keys should be stringified.
-	 * @param string|null			 $prefix The prefix that should be use to stringify the keys, if not provided
-	 *										then it will be generated.
-		*
-		* @return array<string,mixed> The input array with each numeric key stringified.
-		*/
+	 * @param string|null             $prefix The prefix that should be use to stringify the keys, if not provided
+	 *                                        then it will be generated.
+	 *
+	 * @return array<string,mixed> The input array with each numeric key stringified.
+	 */
 	public static function stringify_keys( array $input, $prefix = null ) {
 		$prefix  = null === $prefix ? uniqid( 'sk_', true ) : $prefix;
 		$visitor = static function ( $key, $value ) use ( $prefix ) {
@@ -354,11 +354,11 @@ class Array_Utils {
 	 * @since 1.0.0
 	 *
 	 * @param array<int|string,mixed> $input  The input array whose stringified keys should be
-	 *										destringified.
-		* @param string				  $prefix The prefix that should be used to target only specific string keys.
-		*
-		* @return array<int|string,mixed> The input array, its stringified keys destringified.
-		*/
+	 *                                        destringified.
+	 * @param string                  $prefix The prefix that should be used to target only specific string keys.
+	 *
+	 * @return array<int|string,mixed> The input array, its stringified keys destringified.
+	 */
 	public static function destringify_keys( array $input, $prefix = 'sk_' ) {
 		$visitor = static function ( $key, $value ) use ( $prefix ) {
 			$destringified_key = 0 === self::strpos( $key, $prefix ) ? null : $key;
@@ -375,12 +375,12 @@ class Array_Utils {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param		 array $input The input array whose nodes should be visited.
+	 * @param array    $input   The input array whose nodes should be visited.
 	 * @param callable $visitor A callback function that will be called on each array item; the callback will
-	 *						  receive the item key and value as input and should return an array that contains
-		*						  the update key and value in the shape `[ <key>, <value> ]`. Returning a `null`
-		*						  key will cause the element to be removed from the array.
-		*/
+	 *                          receive the item key and value as input and should return an array that contains
+	 *                          the update key and value in the shape `[ <key>, <value> ]`. Returning a `null`
+	 *                          key will cause the element to be removed from the array.
+	 */
 	public static function array_visit_recursive( $input, callable $visitor ) {
 		if ( ! is_array( $input ) ) {
 			return $input;
