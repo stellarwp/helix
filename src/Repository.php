@@ -2829,15 +2829,15 @@ abstract class Repository implements Repository_Interface {
 	 * {@inheritdoc}
 	 */
 	public function filter_postarr_for_create( array $postarr ) {
-		 /**
-		  * Filters the post array that will be used for the creation of a post
-		  * of the type managed by the repository.
-		  *
-		  * @since 1.0.0
-		  *
-		  * @param array $postarr The post array that will be sent to the create callback.
-		  */
-		 return apply_filters( "helix_repository_{$this->filter_name}_update_postarr", $postarr );
+		/**
+		 * Filters the post array that will be used for the creation of a post
+		 * of the type managed by the repository.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $postarr The post array that will be sent to the create callback.
+		 */
+		return apply_filters( "helix_repository_{$this->filter_name}_update_postarr", $postarr );
 	}
 
 	/**
