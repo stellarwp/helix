@@ -453,7 +453,7 @@ abstract class Repository implements Repository_Interface {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( "stellarwp_helix_repository_{$this->filter_name}_init", $this );
+		do_action( "helix_repository_{$this->filter_name}_init", $this );
 	}
 
 	/**
@@ -570,7 +570,7 @@ abstract class Repository implements Repository_Interface {
 		 *
 		 * @param WP_Query $query
 		 */
-		do_action( "stellarwp_helix_repository_{$this->filter_name}_pre_count_posts", $query );
+		do_action( "helix_repository_{$this->filter_name}_pre_count_posts", $query );
 
 		$ids = $query->get_posts();
 
@@ -613,7 +613,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param bool $use_query_builder Whether a query builder was used to build this query or not.
 		 * @param Repository\Interface $query_builder The query builder in use, if any.
 		 */
-		do_action( "stellarwp_helix_repository_{$this->filter_name}_query",
+		do_action( "helix_repository_{$this->filter_name}_query",
 			$query,
 			$this,
 			$use_query_builder,
@@ -655,7 +655,7 @@ abstract class Repository implements Repository_Interface {
 		 *
 		 * @param WP_Query $query
 		 */
-		do_action( "stellarwp_helix_repository_{$this->filter_name}_pre_found_posts", $query );
+		do_action( "helix_repository_{$this->filter_name}_pre_found_posts", $query );
 
 		$query->get_posts();
 
@@ -700,7 +700,7 @@ abstract class Repository implements Repository_Interface {
 		 *
 		 * @param WP_Query $query
 		 */
-		do_action( "stellarwp_helix_repository_{$this->filter_name}_pre_get_posts", $query );
+		do_action( "helix_repository_{$this->filter_name}_pre_get_posts", $query );
 
 		$results = $query->get_posts();
 
@@ -912,7 +912,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param int                          $id        The formatted post ID.
 		 * @param Repository\Interface $this      The current repository object.
 		 */
-		$formatted = apply_filters( "stellarwp_helix_repository_{$this->filter_name}_format_item", $formatted, $id, $this );
+		$formatted = apply_filters( "helix_repository_{$this->filter_name}_format_item", $formatted, $id, $this );
 
 		return $formatted;
 	}
@@ -1020,7 +1020,7 @@ abstract class Repository implements Repository_Interface {
 		 *
 		 * @since 1.0.0
 		 */
-		return apply_filters( "stellarwp_helix_repository_{$this->filter_name}_apply_modifier_schema_entry", $schema_entry, $this );
+		return apply_filters( "helix_repository_{$this->filter_name}_apply_modifier_schema_entry", $schema_entry, $this );
 	}
 
 	/**
@@ -2465,7 +2465,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param array|null $deleted An array containing the the IDs of the deleted posts.
 		 * @param self       $this    This repository instance.
 		 */
-		$deleted = apply_filters( "stellarwp_helix_repository_{$this->filter_name}_delete", null, $to_delete );
+		$deleted = apply_filters( "helix_repository_{$this->filter_name}_delete", null, $to_delete );
 		if ( null !== $deleted ) {
 			return $deleted;
 		}
@@ -2505,7 +2505,7 @@ abstract class Repository implements Repository_Interface {
 		 * Whether background, asynchronous, deletion of posts is active or not for all repositories.
 		 *
 		 * If active then if the number of posts to delete is over the threshold, defined
-		 * by the `stellarwp_helix_repository_delete_background_threshold` filter, then the deletion will happen
+		 * by the `helix_repository_delete_background_threshold` filter, then the deletion will happen
 		 * in background in other requests.
 		 *
 		 * @since 1.0.0
@@ -2513,13 +2513,13 @@ abstract class Repository implements Repository_Interface {
 		 * @param bool  $background_active Whether background deletion is active or not.
 		 * @param array $to_delete         The array of post IDs to delete.
 		 */
-		$background_active = (bool) apply_filters( 'stellarwp_helix_repository_delete_background_activated', true, $to_delete );
+		$background_active = (bool) apply_filters( 'helix_repository_delete_background_activated', true, $to_delete );
 
 		/**
 		 * Whether background, asynchronous, deletion of posts is active or not for this specific repository.
 		 *
 		 * If active then if the number of posts to delete is over the threshold, defined
-		 * by the `stellarwp_helix_repository_delete_background_threshold` filter, then the deletion will happen
+		 * by the `helix_repository_delete_background_threshold` filter, then the deletion will happen
 		 * in background in other requests.
 		 *
 		 * @since 1.0.0
@@ -2528,7 +2528,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param array $to_delete         The array of post IDs to delete.
 		 */
 		$background_active = (bool) apply_filters(
-			"stellarwp_helix_repository_{$this->filter_name}_delete_background_activated",
+			"helix_repository_{$this->filter_name}_delete_background_activated",
 			$background_active,
 			$to_delete
 		);
@@ -2549,21 +2549,21 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * The number of posts above which the deletion will happen in background.
 		 *
-		 * This filter will be ignored if background delete is deactivated with the `stellarwp_helix_repository_delete_background_activated`
-		 * or `stellarwp_helix_repository_{$this->filter_name}_delete_background_activated` filter.
+		 * This filter will be ignored if background delete is deactivated with the `helix_repository_delete_background_activated`
+		 * or `helix_repository_{$this->filter_name}_delete_background_activated` filter.
 		 *
 		 * @since 1.0.0
 		 *
 		 * @param int The threshold over which posts will be deleted in background.
 		 * @param array $to_delete The post IDs to delete.
 		 */
-		$background_threshold = (int) apply_filters( 'stellarwp_helix_repository_delete_background_threshold', 20, $to_delete );
+		$background_threshold = (int) apply_filters( 'helix_repository_delete_background_threshold', 20, $to_delete );
 
 		/**
 		 * The number of posts above which the deletion will happen in background.
 		 *
-		 * This filter will be ignored if background delete is deactivated with the `stellarwp_helix_repository_delete_background_activated`
-		 * or `stellarwp_helix_repository_{$this->filter_name}_delete_background_activated` filter.
+		 * This filter will be ignored if background delete is deactivated with the `helix_repository_delete_background_activated`
+		 * or `helix_repository_{$this->filter_name}_delete_background_activated` filter.
 		 *
 		 * @since 1.0.0
 		 *
@@ -2571,7 +2571,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param array $to_delete The post IDs to delete.
 		 */
 		$background_threshold = (int) apply_filters(
-			"stellarwp_helix_repository_{$this->filter_name}_delete_background_threshold",
+			"helix_repository_{$this->filter_name}_delete_background_threshold",
 			$background_threshold,
 			$to_delete
 		);
@@ -2593,7 +2593,7 @@ abstract class Repository implements Repository_Interface {
 		 * Whether background, asynchronous, update of posts is active or not for all repositories.
 		 *
 		 * If active then if the number of posts to update is over the threshold, defined
-		 * by the `stellarwp_helix_repository_update_background_threshold` filter, then the update will happen
+		 * by the `helix_repository_update_background_threshold` filter, then the update will happen
 		 * in background in other requests.
 		 *
 		 * @since 1.0.0
@@ -2601,13 +2601,13 @@ abstract class Repository implements Repository_Interface {
 		 * @param bool  $background_active Whether background update is active or not.
 		 * @param array $to_update         The array of post IDs to update.
 		 */
-		$background_active = (bool) apply_filters( 'stellarwp_helix_repository_update_background_activated', true, $to_update );
+		$background_active = (bool) apply_filters( 'helix_repository_update_background_activated', true, $to_update );
 
 		/**
 		 * Whether background, asynchronous, update of posts is active or not for this specific repository.
 		 *
 		 * If active then if the number of posts to update is over the threshold, defined
-		 * by the `stellarwp_helix_repository_update_background_threshold` filter, then the update will happen
+		 * by the `helix_repository_update_background_threshold` filter, then the update will happen
 		 * in background in other requests.
 		 *
 		 * @since 1.0.0
@@ -2616,7 +2616,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param array $to_update         The array of post IDs to update.
 		 */
 		$background_active = (bool) apply_filters(
-			"stellarwp_helix_repository_{$this->filter_name}_update_background_activated",
+			"helix_repository_{$this->filter_name}_update_background_activated",
 			$background_active,
 			$to_update
 		);
@@ -2637,21 +2637,21 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * The number of posts above which the update will happen in background.
 		 *
-		 * This filter will be ignored if background update is deactivated with the `stellarwp_helix_repository_update_background_activated`
-		 * or `stellarwp_helix_repository_{$this->filter_name}_update_background_activated` filter.
+		 * This filter will be ignored if background update is deactivated with the `helix_repository_update_background_activated`
+		 * or `helix_repository_{$this->filter_name}_update_background_activated` filter.
 		 *
 		 * @since 1.0.0
 		 *
 		 * @param int The threshold over which posts will be updated in background.
 		 * @param array $to_update The post IDs to update.
 		 */
-		$background_threshold = (int) apply_filters( 'stellarwp_helix_repository_update_background_threshold', 20, $to_update );
+		$background_threshold = (int) apply_filters( 'helix_repository_update_background_threshold', 20, $to_update );
 
 		/**
 		 * The number of posts above which the update will happen in background.
 		 *
-		 * This filter will be ignored if background update is deactivated with the `stellarwp_helix_repository_update_background_activated`
-		 * or `stellarwp_helix_repository_{$this->filter_name}_update_background_activated` filter.
+		 * This filter will be ignored if background update is deactivated with the `helix_repository_update_background_activated`
+		 * or `helix_repository_{$this->filter_name}_update_background_activated` filter.
 		 *
 		 * @since 1.0.0
 		 *
@@ -2659,7 +2659,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param array $to_update The post IDs to update.
 		 */
 		$background_threshold = (int) apply_filters(
-			"stellarwp_helix_repository_{$this->filter_name}_update_background_threshold",
+			"helix_repository_{$this->filter_name}_update_background_threshold",
 			$background_threshold,
 			$to_update
 		);
@@ -2689,7 +2689,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param array|int $to_delete  An array of post IDs to delete.
 		 * @param bool      $background Whether the delete operation will happen in background or not.
 		 */
-		$callback = apply_filters( 'stellarwp_helix_repository_delete_callback', 'wp_delete_post', (array) $to_delete, (bool) $background );
+		$callback = apply_filters( 'helix_repository_delete_callback', 'wp_delete_post', (array) $to_delete, (bool) $background );
 
 		/**
 		 * Filters the callback that all repositories should use to delete posts.
@@ -2703,7 +2703,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param bool      $background Whether the delete operation will happen in background or not.
 		 */
 		$callback = apply_filters(
-			"stellarwp_helix_repository_{$this->filter_name}_delete_callback",
+			"helix_repository_{$this->filter_name}_delete_callback",
 			$callback,
 			(array) $to_delete,
 			(bool) $background
@@ -2741,7 +2741,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param array|int $to_update  An array of post IDs to update.
 		 * @param bool      $background Whether the update operation will happen in background or not.
 		 */
-		$callback = apply_filters( 'stellarwp_helix_repository_update_callback', 'wp_update_post', (array) $to_update, (bool) $background );
+		$callback = apply_filters( 'helix_repository_update_callback', 'wp_update_post', (array) $to_update, (bool) $background );
 
 		/**
 		 * Filters the callback that all repositories should use to update posts.
@@ -2755,7 +2755,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param bool      $background Whether the update operation will happen in background or not.
 		 */
 		$callback = apply_filters(
-			"stellarwp_helix_repository_{$this->filter_name}_update_callback",
+			"helix_repository_{$this->filter_name}_update_callback",
 			$callback,
 			(array) $to_update,
 			(bool) $background
@@ -2790,7 +2790,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param array $postarr The post array that will be sent to the update callback.
 		 * @param int The post ID if set.
 		 */
-		return apply_filters( "stellarwp_helix_repository_{$this->filter_name}_update_postarr", $postarr, $post_id );
+		return apply_filters( "helix_repository_{$this->filter_name}_update_postarr", $postarr, $post_id );
 	}
 
 	/**
@@ -2837,7 +2837,7 @@ abstract class Repository implements Repository_Interface {
 		  *
 		  * @param array $postarr The post array that will be sent to the create callback.
 		  */
-		 return apply_filters( "stellarwp_helix_repository_{$this->filter_name}_update_postarr", $postarr );
+		 return apply_filters( "helix_repository_{$this->filter_name}_update_postarr", $postarr );
 	}
 
 	/**
@@ -2913,7 +2913,7 @@ abstract class Repository implements Repository_Interface {
 		 *                              values will be interpreted as failures to create the post.
 		 * @param array    $postarr     The post array that will be used for the creation.
 		 */
-		$callback = apply_filters( 'stellarwp_helix_repository_create_callback', 'wp_insert_post', $postarr );
+		$callback = apply_filters( 'helix_repository_create_callback', 'wp_insert_post', $postarr );
 
 		/**
 		 * Filters the callback that all repositories should use to create posts.
@@ -2926,7 +2926,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param array    $postarr     The post array that will be used for the creation.
 		 */
 		$callback = apply_filters(
-			"stellarwp_helix_repository_{$this->filter_name}_create_callback",
+			"helix_repository_{$this->filter_name}_create_callback",
 			$callback,
 			$postarr
 		);
@@ -3104,7 +3104,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param WP_Query $query      The query object, the query arguments have not been parsed yet.
 		 * @param          $this       $this This repository instance
 		 */
-		$query_args = apply_filters( "stellarwp_helix_repository_{$this->filter_name}_query_args", $query_args, $query, $this );
+		$query_args = apply_filters( "helix_repository_{$this->filter_name}_query_args", $query_args, $query, $this );
 
 		/**
 		 * Provides a last-ditch effort to override the filtered offset.
@@ -3116,7 +3116,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param null|int $filtered_offset Offset parameter setting.
 		 * @param array    $query_args      List of query arguments.
 		 */
-		$filtered_offset = apply_filters( 'stellarwp_helix_repository_query_arg_offset_override', null, $query_args );
+		$filtered_offset = apply_filters( 'helix_repository_query_arg_offset_override', null, $query_args );
 
 		if ( $filtered_offset || isset( $query_args['offset'] ) ) {
 			$per_page = (int) Arr::get( $query_args, 'posts_per_page', get_option( 'posts_per_page' ) );
@@ -3528,7 +3528,7 @@ abstract class Repository implements Repository_Interface {
 
 			if ( 'AND' === $where_relation || ! empty( $matching_term_ids ) ) {
 				// Let's not add WHERE and JOIN clauses if there is nothing to add.
-				$tt_alias = 'stellarwp_helix_tt_' . self::$alias_counter ++;
+				$tt_alias = 'helix_tt_' . self::$alias_counter ++;
 				$this->filter_query->join(
 					"JOIN {$wpdb->term_relationships} {$tt_alias} ON {$wpdb->posts}.ID = {$tt_alias}.object_id"
 				);
@@ -3538,7 +3538,7 @@ abstract class Repository implements Repository_Interface {
 		}
 
 		if ( ! empty( $custom_fields ) ) {
-			$meta_alias = 'stellarwp_helix_meta_' . self::$alias_counter ++;
+			$meta_alias = 'helix_meta_' . self::$alias_counter ++;
 
 			$custom_fields = array_map( static function ( $custom_field ) use ( $wpdb, $meta_alias ) {
 				return $wpdb->prepare(

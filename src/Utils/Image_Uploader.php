@@ -152,7 +152,7 @@ class Image_Uploader {
 		 * @param bool   $allow_local_urls Whether to allow local URLs.
 		 * @param string $file_url         File URL.
 		 */
-		$allow_local_urls = apply_filters( 'stellarwp_helix_image_uploader_local_urls', false, $file_url );
+		$allow_local_urls = apply_filters( 'helix_image_uploader_local_urls', false, $file_url );
 
 		if ( ! $allow_local_urls && ! filter_var( $file_url, FILTER_VALIDATE_URL ) ) {
 			return false;

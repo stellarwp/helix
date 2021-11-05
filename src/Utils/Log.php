@@ -20,7 +20,7 @@ class Log {
 		 * @param mixed  $data Log data.
 		 */
 		do_action(
-			'stellarwp_helix_log',
+			'helix_log',
 			$level,
 			$source,
 			$data
