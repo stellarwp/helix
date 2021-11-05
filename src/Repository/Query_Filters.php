@@ -7,14 +7,14 @@ use WP_Query;
 /**
  * Class Query_Filters
  *
- * @since 4.7.19
+ * @since 1.0.0
  */
 class Query_Filters {
 
 	/**
 	 * Indicates something has to happen "after" something else. The specific meaning is contextual.
 	 *
-	 * @since 4.9.21
+	 * @since 1.0.0
 	 */
 	CONST AFTER = 'after:';
 
@@ -35,7 +35,7 @@ class Query_Filters {
 	/**
 	 * An array of the filters that can be set and unset by id.
 	 *
-	 * @since 4.9.14
+	 * @since 1.0.0
 	 *
 	 * @var array
 	 */
@@ -81,7 +81,7 @@ class Query_Filters {
 	/**
 	 * Query_Filters constructor.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->query_vars = self::$initial_query_vars;
@@ -90,7 +90,7 @@ class Query_Filters {
 	/**
 	 * Builds an "not exists or is not in" media query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array|string     $meta_keys On what meta_keys the check should be made.
 	 * @param int|string|array $values    A single value, an array of values or a CSV list of values.
@@ -144,7 +144,7 @@ class Query_Filters {
 	/**
 	 * Builds an "exists and is in" media query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array|string     $meta_keys On what meta_keys the check should be made.
 	 * @param int|string|array $values    A single value, an array of values or a CSV list of values.
@@ -190,7 +190,7 @@ class Query_Filters {
 	/**
 	 * Builds a meta query to check that at least of the meta key exists.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array|string $meta_keys
 	 * @param string       $query_slug
@@ -226,7 +226,7 @@ class Query_Filters {
 	 * Builds a meta query to check that a meta is either equal to a value or
 	 * not exists.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array|string $meta_keys
 	 * @param array|string $values
@@ -278,7 +278,7 @@ class Query_Filters {
 	 * Builds a meta query to check that a meta is either not equal to a value or
 	 * not exists.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array|string $meta_keys
 	 * @param array|string $values
@@ -330,7 +330,7 @@ class Query_Filters {
 	/**
 	 * Filters the WHERE clause of the query to match posts with a field like.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string   $where
 	 * @param WP_Query $query
@@ -358,7 +358,7 @@ class Query_Filters {
 	/**
 	 * Builds the escaped WHERE entry to match a field like the entry.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $field
 	 * @param string $entry
@@ -386,7 +386,7 @@ class Query_Filters {
 	 * Here we perform, after the query did run, further filtering operations that would
 	 * result in more JOIN and/or sub-SELECT clauses being added to the query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param int      $found_posts The number of found posts.
 	 * @param WP_Query $query       The current query object.
@@ -461,7 +461,7 @@ class Query_Filters {
 	/**
 	 * Sets the current query object.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param WP_Query $query
 	 */
@@ -472,7 +472,7 @@ class Query_Filters {
 	/**
 	 * Sets up `posts_where` filtering to get posts with a title like the value.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $value
 	 */
@@ -488,7 +488,7 @@ class Query_Filters {
 	 * Proxy method to add a  filter calling the WordPress `add_filter` function
 	 * and keep track of it.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string   $tag
 	 * @param callable $function_to_add
@@ -503,7 +503,7 @@ class Query_Filters {
 	/**
 	 * Sets up `posts_where` filtering to get posts with a content like the value.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $value
 	 */
@@ -518,7 +518,7 @@ class Query_Filters {
 	/**
 	 * Sets up `posts_where` filtering to get posts with an excerpt like the value.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $value
 	 */
@@ -533,7 +533,7 @@ class Query_Filters {
 	/**
 	 * Sets up `posts_where` filtering to get posts with a filtered content like the value.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $value
 	 */
@@ -548,7 +548,7 @@ class Query_Filters {
 	/**
 	 * Sets up `posts_where` filtering to get posts with a guid that equals the value.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $value
 	 */
@@ -563,7 +563,7 @@ class Query_Filters {
 	/**
 	 * Sets up `posts_where` filtering to get posts with a `to_ping` field equal to the value.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $value
 	 */
@@ -579,7 +579,7 @@ class Query_Filters {
 	 * Filters the WHERE clause of the query to match posts with a specific `to_ping`
 	 * entry.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string   $where
 	 * @param WP_Query $query
@@ -593,7 +593,7 @@ class Query_Filters {
 	/**
 	 * Builds the escaped WHERE entry to match a field that equals the entry.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string   $where
 	 * @param WP_Query $query
@@ -623,7 +623,7 @@ class Query_Filters {
 	/**
 	 * Clean up before the object destruction.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 */
 	public function __destruct() {
 		// let's make sure we clean up when the object is dereferenced
@@ -633,7 +633,7 @@ class Query_Filters {
 	/**
 	 * Removes all the filters this class applied.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 */
 	public function remove_filters() {
 		foreach ( $this->active_filters as $filters ) {
@@ -645,8 +645,7 @@ class Query_Filters {
 	/**
 	 * Add a custom WHERE clause to the query.
 	 *
-	 * @since 4.7.19
-	 * @since 4.9.14 Added the `$id` and `$override` parameters.
+	 * @since 1.0.0
 	 *
 	 * @param string $where_clause
 	 * @param null|string $id          Optional WHERE ID to prevent duplicating clauses.
@@ -679,7 +678,7 @@ class Query_Filters {
 	/**
 	 * Add a custom JOIN clause to the query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string      $join_clause JOIN clause.
 	 * @param null|string $id          Optional JOIN ID to prevent duplicating joins.
@@ -702,9 +701,7 @@ class Query_Filters {
 	/**
 	 * Add a custom ORDER BY to the query.
 	 *
-	 * @since 4.9.5
-	 * @since 4.9.14 Added the `$id` and `$override` parameters.
-	 * @since 4.9.21 Added the `$order` and `$after` parameters.
+	 * @since 1.0.0
 	 *
 	 * @param string|array $orderby       The order by criteria; this argument can be specified in array form to specify
 	 *                                    multiple order by clauses and orders associated to each,
@@ -750,8 +747,7 @@ class Query_Filters {
 	/**
 	 * Add custom select fields to the query.
 	 *
-	 * @since 4.9.5
-	 * @since 4.9.14 Added the `$id` and `$override` parameters.
+	 * @since 1.0.0
 	 *
 	 * @param string $field The field to add to the result.
 	 * @param null|string $id       Optional ORDER ID to prevent duplicating order-by clauses..
@@ -774,7 +770,7 @@ class Query_Filters {
 	/**
 	 * Whether WHERE clauses should be buffered or not.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param bool $buffer_clauses
 	 */
@@ -786,7 +782,7 @@ class Query_Filters {
 	 * Returns the buffered WHERE clause and, optionally, cleans
 	 * and deactivates buffering.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param bool $get_clean Whether  to clean the buffered WHERE
 	 *                        clauses and deactivate buffering before
@@ -808,7 +804,7 @@ class Query_Filters {
 	/**
 	 * Builds the escaped WHERE entry to match a field not in the entry.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string   $where
 	 * @param WP_Query $query
@@ -837,7 +833,7 @@ class Query_Filters {
 	/**
 	 * Creates a SQL interval of strings.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string|array $input
 	 *
@@ -866,7 +862,7 @@ class Query_Filters {
 	/**
 	 * Builds a WHERE clause where field is not in interval.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $field
 	 * @param string $interval
@@ -883,7 +879,7 @@ class Query_Filters {
 	/**
 	 * Builds the escaped WHERE entry to match a field in the entry.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string   $where
 	 * @param WP_Query $query
@@ -910,7 +906,7 @@ class Query_Filters {
 	/**
 	 * Builds a AND WHERE clause.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $field
 	 * @param string $interval
@@ -927,7 +923,7 @@ class Query_Filters {
 	/**
 	 * Filter the `posts_where` filter to add custom WHERE clauses.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string   $where
 	 * @param WP_Query $query
@@ -951,7 +947,7 @@ class Query_Filters {
 	/**
 	 * Filter the `posts_join` filter to add custom JOIN clauses.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string   $join
 	 * @param WP_Query $query
@@ -975,7 +971,7 @@ class Query_Filters {
 	/**
 	 * Filter the `posts_orderby` filter to add custom JOIN clauses.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string   $orderby The `ORDER BY` clause of the query being filtered.
 	 * @param WP_Query $query   The query object currently being filtered.
@@ -1022,7 +1018,7 @@ class Query_Filters {
 	/**
 	 * Filter the `posts_fields` filter to amend fields to be selected.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array    $fields
 	 * @param WP_Query $query
@@ -1048,7 +1044,7 @@ class Query_Filters {
 	 *
 	 * This happens on the `posts_pre_query` filter and
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param null|array $posts A pre-filled array of post results.
 	 * @param \WP_Query  $query The current query object; this is used by the
@@ -1085,7 +1081,7 @@ class Query_Filters {
 	 * runs and returning an empty post array.
 	 * To really run the query it's sufficien to run `get_posts` again on it.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return string The request SQL, as built from the `WP_Query` class including all the
 	 *                possible filtering applied by this class and other classes.
@@ -1101,7 +1097,7 @@ class Query_Filters {
 	/**
 	 * Returns the fields, join, where and orderby clauses for an id.
 	 *
-	 * @since 4.9.14
+	 * @since 1.0.0
 	 *
 	 * @param string $id The identifier of the group to remove.
 	 *
@@ -1125,7 +1121,7 @@ class Query_Filters {
 	/**
 	 * Removes fields, join, where and orderby clauses for an id.
 	 *
-	 * @since 4.9.14
+	 * @since 1.0.0
 	 *
 	 * @param string $id The identifier of the group to remove.
 	 */

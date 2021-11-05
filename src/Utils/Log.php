@@ -9,21 +9,21 @@ class Log {
 	const SUCCESS = 'success';
 	const WARNING = 'warning';
 
-	public static function log( $message, $level, $details ) {
+	public static function log( $level, $source, $data ) {
 		/**
 		 * Provide hook for watching logging info.
 		 * 
 		 * @since 1.0.0
 		 * 
-		 * @param string $message Log message.
 		 * @param string $level Log level.
-		 * @param string $details Log details.
+		 * @param string $source Log source.
+		 * @param mixed  $data Log data.
 		 */
 		do_action(
 			'stellarwp_helix_log',
-			$message,
 			$level,
-			$details
+			$source,
+			$data
 		);
 	}
 }

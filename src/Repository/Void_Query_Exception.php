@@ -9,14 +9,14 @@ namespace StellarWP\Helix\Repository;
  * Repository implementations should handle this exception gracefully as
  * a signal, not an error.
  *
- * @since 4.7.19
+ * @since 1.0.0
  */
-class Void_Query_Exception extends Exception {
+class Void_Query_Exception extends \Exception {
 
 	/**
 	 * Indicates that query would yield no results.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $reason
 	 *

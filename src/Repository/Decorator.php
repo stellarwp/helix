@@ -7,9 +7,9 @@ namespace StellarWP\Helix\Repository;
  * This is the base repository decorator class to ease the decoration
  * of repositories.
  *
- * @since 4.7.19
+ * @since 1.0.0
  */
-abstract class Decorator implements Interface {
+abstract class Decorator implements Repository_Interface {
 	/**
 	 * @var Interface|Read_Interface|Update_Interface
 	 */
@@ -303,11 +303,11 @@ abstract class Decorator implements Interface {
 	/**
 	 * Sets the repository to be decorated.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
-	 * @param Interface $decorated
+	 * @param Repository_Interface $decorated
 	 */
-	protected function set_decorated_repository( Interface $decorated ) {
+	protected function set_decorated_repository( Repository_Interface $decorated ) {
 		$this->decorated = $decorated;
 	}
 
@@ -497,7 +497,7 @@ abstract class Decorator implements Interface {
 	 *
 	 * The check is made recursively for decorators to get to the first repository implementation.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string $class The class to check for.
 	 *
@@ -512,7 +512,7 @@ abstract class Decorator implements Interface {
 	/**
 	 * Returns the concrete repository implementation that's "hidden" under the decorator(s).
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return Interface The concrete repository instance.
 	 */
@@ -583,7 +583,7 @@ abstract class Decorator implements Interface {
 	/**
 	 * Handle getting additional property from decorated object.
 	 *
-	 * @since 4.9.6.1
+	 * @since 1.0.0
 	 *
 	 * @param string $name Property name.
 	 *
@@ -596,7 +596,7 @@ abstract class Decorator implements Interface {
 	/**
 	 * Handle setting additional property on decorated object.
 	 *
-	 * @since 4.9.6.1
+	 * @since 1.0.0
 	 *
 	 * @param string $name  Property name.
 	 * @param mixed  $value Property value.
@@ -608,7 +608,7 @@ abstract class Decorator implements Interface {
 	/**
 	 * Check if additional property on decorated object exists.
 	 *
-	 * @since 4.9.6.1
+	 * @since 1.0.0
 	 *
 	 * @param string $name Property name.
 	 *
@@ -621,7 +621,7 @@ abstract class Decorator implements Interface {
 	/**
 	 * Call methods on decorated object.
 	 *
-	 * @since 4.9.6.1
+	 * @since 1.0.0
 	 *
 	 * @param string $name      Method name.
 	 * @param array  $arguments Method arguments.

@@ -4,21 +4,21 @@ namespace StellarWP\Helix\Repository;
 /**
  * Interface Update_Interface
  *
- * @since 4.7.19
+ * @since 1.0.0
  */
 interface Update_Interface extends Setter_Interface {
 
 	/**
 	 * Commits the updates to the selected post IDs to the database.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 */
 	public function save();
 
 	/**
 	 * Adds an alias for an update/save field.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string $alias The alias to add.
 	 * @param string $field_name The field name this alias should resolve to, this
@@ -30,7 +30,7 @@ interface Update_Interface extends Setter_Interface {
 	/**
 	 * Returns the update fields aliases for the repository.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return array This repository update fields aliases map.
 	 */
@@ -39,7 +39,7 @@ interface Update_Interface extends Setter_Interface {
 	/**
 	 * Replaces the update fields aliases for this repository.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array $update_fields_aliases The new update fields aliases
 	 *                                     map for this repository.
@@ -52,7 +52,7 @@ interface Update_Interface extends Setter_Interface {
 	 * Extending classes that need to perform some logic checks during updates
 	 * should extend this method.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array    $postarr The post array that will be sent to the update callback.
 	 * @param int|null $post_id The ID  of the post that will be updated.
@@ -66,7 +66,7 @@ interface Update_Interface extends Setter_Interface {
 	 * Creates a post of the type managed by the repository with the fields
 	 * provided using the `set` or `set_args` methods.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return WP_Post|false The created post object or `false` if the creation
 	 *                       fails for logic or runtime issues.
@@ -77,7 +77,7 @@ interface Update_Interface extends Setter_Interface {
 	 * Builds the post array that should be used to update or create a post of
 	 * the type managed by the repository.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param int|null $id The post ID that's being updated or `null` to get the
 	 *                     post array for a new post.
@@ -96,7 +96,7 @@ interface Update_Interface extends Setter_Interface {
 	 * Extending classes that need to perform some logic checks during creations
 	 * should extend this method.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array $postarr The post array that will be sent to the creation callback.
 	 *
@@ -108,7 +108,7 @@ interface Update_Interface extends Setter_Interface {
 	/**
 	 * Sets the create args the repository will use to create posts.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array $create_args The create args the repository will use to create posts.
 	 */
@@ -117,7 +117,7 @@ interface Update_Interface extends Setter_Interface {
 	/**
 	 * Returns the create args the repository will use to create posts.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return array The create args the repository will use to create posts.
 	 */

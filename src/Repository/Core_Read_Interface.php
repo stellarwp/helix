@@ -4,7 +4,7 @@
  *
  * This interface is the minimal one a repository should implement to be called such.
  *
- * @since   4.10.2
+ * @since   1.0.0
  *
  * @package StellarWP\Helix\Repository
  */
@@ -13,11 +13,12 @@ namespace StellarWP\Helix\Repository;
 
 use Read_Interface;
 use WP_Post;
+use StellarWP\Helix\Utils;
 
 /**
  * Class Core_Read_Interface
  *
- * @since   4.10.2
+ * @since 1.0.0
  *
  * @package Repository
  */
@@ -27,7 +28,7 @@ interface Core_Read_Interface {
 	 *
 	 * This is the same as calling `by` multiple times with different arguments.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array $args An associative array of arguments to filter
 	 *                    the posts by in the shape [ <key>, <value> ]. * * @return Read_Interface
@@ -40,7 +41,7 @@ interface Core_Read_Interface {
 	 * While the signature only shows 2 arguments additional arguments will be passed
 	 * to the schema filters.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $key
 	 * @param mixed  $value
@@ -54,7 +55,7 @@ interface Core_Read_Interface {
 	/**
 	 * Just an alias of the `by` method to allow for easier reading.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $key
 	 * @param mixed  $value
@@ -69,7 +70,7 @@ interface Core_Read_Interface {
 	 * Mind that this implementation does not support a `by( 'page', 2 )`
 	 * filter to force more readable code.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param int $page
 	 *
@@ -96,7 +97,7 @@ interface Core_Read_Interface {
 	 * Mind that this value ignores the offset returning the
 	 * number of results if limits where not applied.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @return int
 	 */
@@ -117,7 +118,7 @@ interface Core_Read_Interface {
 	 * Mind that this implementation does not support a `by( 'offset', 2 )`
 	 * filter to force more readable code.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param int  $offset
 	 * @param bool $increment Whether to increment the offset by the value
@@ -133,7 +134,7 @@ interface Core_Read_Interface {
 	 * Mind that this implementation does not support a `by( 'order', 2 )`
 	 * filter to force more readable code.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $order
 	 *
@@ -147,7 +148,7 @@ interface Core_Read_Interface {
 	 * Mind that this implementation does not support a `by( 'order_by', 'title' )`
 	 * filter to force more readable code.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string|array<string,string> $order_by The post field, custom field or alias key to order posts by.
 	 * @param string                      $order    The order direction; optional; shortcut for the `order` method; defaults
@@ -163,7 +164,7 @@ interface Core_Read_Interface {
 	 * Mind that this implementation does not support a `by( 'fields', 'ids' )`
 	 * filter to force more readable code.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $fields
 	 *
@@ -176,7 +177,7 @@ interface Core_Read_Interface {
 	 *
 	 * Successive calls will stack, not replace each one.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array|int $post_ids
 	 *
@@ -189,7 +190,7 @@ interface Core_Read_Interface {
 	 *
 	 * Successive calls will stack, not replace each one.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array|int $post_ids
 	 *
@@ -202,7 +203,7 @@ interface Core_Read_Interface {
 	 *
 	 * Successive calls will stack, not replace each one.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array|int $post_id
 	 *
@@ -215,7 +216,7 @@ interface Core_Read_Interface {
 	 *
 	 * Successive calls will stack, not replace each one.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array $post_ids
 	 *
@@ -228,7 +229,7 @@ interface Core_Read_Interface {
 	 *
 	 * Successive calls will stack, not replace each one.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array $post_ids
 	 *
@@ -258,7 +259,7 @@ interface Core_Read_Interface {
 	 * Differently from the `found` method this method will apply the
 	 * offset if set.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @return int
 	 */
@@ -271,7 +272,7 @@ interface Core_Read_Interface {
 	 * posts matching the query should be returned then this will be
 	 * the first post of all those matching the query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @return WP_Post|mixed|null
 	 *
@@ -286,7 +287,7 @@ interface Core_Read_Interface {
 	 * posts matching the query should be returned then this will be
 	 * the last post of all those matching the query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @return WP_Post|mixed|null
 	 *
@@ -302,7 +303,7 @@ interface Core_Read_Interface {
 	 * posts matching the query should be returned then this will be
 	 * the nth post of all those matching the query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param int $n
 	 *
@@ -319,7 +320,7 @@ interface Core_Read_Interface {
 	 * posts matching the query should be returned then this method will
 	 * return the first n posts of all those matching the query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @return array An array of posts matching the query.
 	 *
@@ -333,7 +334,7 @@ interface Core_Read_Interface {
 	 * This method will implicitly build and use a `WP_List_Util` instance on the return
 	 * value of a call to the `all` method.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string $field The field to pluck from each result.
 	 *
@@ -349,7 +350,7 @@ interface Core_Read_Interface {
 	 * This method will implicitly build and use a `WP_List_Util` instance on the return
 	 * value of a call to the `all` method.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array  $args     Optional. An array of key => value arguments to match
 	 *                         against each object. Default empty array.
@@ -370,7 +371,7 @@ interface Core_Read_Interface {
 	 * This method will implicitly build and use a `WP_List_Util` instance on the return
 	 * value of a call to the `all` method.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string|array $orderby       Optional. Either the field name to order by or an array
 	 *                                    of multiple orderby fields as $orderby => $order.
@@ -387,14 +388,16 @@ interface Core_Read_Interface {
 	/**
 	 * Builds a collection on the result of the `all()` method call.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
-	 * @return \Tribe__Utils__Post_Collection
+	 * @return Utils\Post_Collection
 	 */
 	public function collect();
 
 	/**
 	 * Gets the ids of the posts matching the query.
+	 * 
+	 * @since 1.0.0
 	 *
 	 * @return array An array containing the post IDs to update.
 	 */

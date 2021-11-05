@@ -4,7 +4,7 @@ namespace StellarWP\Helix\Repository;
 /**
  * Interface Setter_Interface
  *
- * @since 4.8.2
+ * @since 1.0.0
  */
 interface Setter_Interface {
 
@@ -17,9 +17,7 @@ interface Setter_Interface {
 	 * a taxonomy and will, finally, set on a custom field.
 	 * Updates to the same key will not stack.
 	 *
-	 * @since 4.7.19
-	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string         $key
 	 * @param mixed|callable $value
@@ -34,7 +32,7 @@ interface Setter_Interface {
 	 *
 	 * Updates to the same key will not stack.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array $update_map A map relating update keys to values.
 	 *

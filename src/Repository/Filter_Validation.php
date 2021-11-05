@@ -2,7 +2,7 @@
 /**
  * Provides methods to validate repository filters.
  *
- * @since   4.10.2
+ * @since 1.0.0
  *
  * @package Repository
  */
@@ -22,7 +22,7 @@ trait Filter_Validation {
 	 *  ]
 	 * ```
 	 *
-	 * @since 4.10.2
+	 * @since 1.0.0
 	 *
 	 * @param       string $filter The name of the filter currently validating.
 	 * @param array        $call_args The current filter call args, usually `func_get_args()`.

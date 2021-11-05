@@ -438,7 +438,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Repository constructor.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->filter_query = new Repository\Query_Filters();
@@ -451,9 +451,9 @@ abstract class Repository implements Repository_Interface {
 		 *
 		 * @param Repository $this This repository instance
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 */
-		do_action( "stellar_repository_{$this->filter_name}_init", $this );
+		do_action( "stellarwp_helix_repository_{$this->filter_name}_init", $this );
 	}
 
 	/**
@@ -473,7 +473,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Returns the value of a protected property.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $name
 	 *
@@ -491,7 +491,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Magic method to set protected properties.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $name
 	 * @param mixed  $value
@@ -506,7 +506,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Whether the class has a property with the specific name or not.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $name
 	 *
@@ -566,11 +566,11 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * Filters the query object by reference before counting found posts in the current page.
 		 *
-		 * @since 4.7.19
+		 * @since 1.0.0
 		 *
 		 * @param WP_Query $query
 		 */
-		do_action( "stellar_repository_{$this->filter_name}_pre_count_posts", $query );
+		do_action( "stellarwp_helix_repository_{$this->filter_name}_pre_count_posts", $query );
 
 		$ids = $query->get_posts();
 
@@ -605,7 +605,7 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * Fires after the query has been built and before it's returned.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param WP_Query $query The built query.
 		 * @param array $query_args An array of query arguments used to build the query.
@@ -613,7 +613,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param bool $use_query_builder Whether a query builder was used to build this query or not.
 		 * @param Repository\Interface $query_builder The query builder in use, if any.
 		 */
-		do_action( "stellar_repository_{$this->filter_name}_query",
+		do_action( "stellarwp_helix_repository_{$this->filter_name}_query",
 			$query,
 			$this,
 			$use_query_builder,
@@ -651,11 +651,11 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * Filters the query object by reference before counting found posts.
 		 *
-		 * @since 4.7.19
+		 * @since 1.0.0
 		 *
 		 * @param WP_Query $query
 		 */
-		do_action( "stellar_repository_{$this->filter_name}_pre_found_posts", $query );
+		do_action( "stellarwp_helix_repository_{$this->filter_name}_pre_found_posts", $query );
 
 		$query->get_posts();
 
@@ -696,11 +696,11 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * Filters the query object by reference before getting the posts.
 		 *
-		 * @since 4.7.19
+		 * @since 1.0.0
 		 *
 		 * @param WP_Query $query
 		 */
-		do_action( "stellar_repository_{$this->filter_name}_pre_get_posts", $query );
+		do_action( "stellarwp_helix_repository_{$this->filter_name}_pre_get_posts", $query );
 
 		$results = $query->get_posts();
 
@@ -799,7 +799,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Merges arguments into a query arg.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string    $key
 	 * @param array|int $value
@@ -892,7 +892,7 @@ abstract class Repository implements Repository_Interface {
 	 *
 	 * Extending classes should use this method to format return values to the expected format.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param int|WP_Post $id
 	 *
@@ -906,13 +906,13 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * Filters a single formatted result.
 		 *
-		 * @since 4.9.11
+		 * @since 1.0.0
 		 *
 		 * @param mixed|WP_Post                $formatted The formatted post result, usually a post object.
 		 * @param int                          $id        The formatted post ID.
 		 * @param Repository\Interface $this      The current repository object.
 		 */
-		$formatted = apply_filters( "stellar_repository_{$this->filter_name}_format_item", $formatted, $id, $this );
+		$formatted = apply_filters( "stellarwp_helix_repository_{$this->filter_name}_format_item", $formatted, $id, $this );
 
 		return $formatted;
 	}
@@ -981,7 +981,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Applies and returns a schema entry.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $key
 	 * @param mixed  $value
@@ -1018,9 +1018,9 @@ abstract class Repository implements Repository_Interface {
 		 * @param mixed             $schema_entry A scalar value or a callable.
 		 * @param Repository $this         This repository instance
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 */
-		return apply_filters( "stellar_repository_{$this->filter_name}_apply_modifier_schema_entry", $schema_entry, $this );
+		return apply_filters( "stellarwp_helix_repository_{$this->filter_name}_apply_modifier_schema_entry", $schema_entry, $this );
 	}
 
 	/**
@@ -1059,7 +1059,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Filters posts by simple meta schema value.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param mixed $value Meta value.
 	 */
@@ -1080,7 +1080,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Filters posts by simple tax schema value.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param int|string|array $value Term value(s).
 	 */
@@ -1186,7 +1186,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Returns the query modifier for a key.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $key
 	 * @param array  $call_args
@@ -1221,7 +1221,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Whether the current schema defines an application for the key or not.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param $key
 	 *
@@ -1234,7 +1234,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Whether a filter defined and handled by the repository exists or not.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $key
 	 *
@@ -1249,7 +1249,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Normalizes the filter key to allow broad matching of the `by` filters.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * E.g. `by( 'id', 23 )` is the same as `by( 'ID', 23 ).
 	 * E.g. `by( 'parent', 23 )` is the same as `by( `post_parent`, 23 )`
@@ -1293,7 +1293,7 @@ abstract class Repository implements Repository_Interface {
 	 * This behaviour is in opposition to "stackable" modifiers that will,
 	 * instead, be composed and stacked.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -1306,7 +1306,7 @@ abstract class Repository implements Repository_Interface {
 	 *
 	 * This is the same as calling `where` multiple times with different arguments.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array $args An associative array of arguments to filter
 	 *                    the posts by in the shape [ <key>, <value> ].
@@ -1425,7 +1425,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Whether the current key can be updated by this repository or not.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $key
 	 *
@@ -1450,7 +1450,7 @@ abstract class Repository implements Repository_Interface {
 	 * Updates the update post payload to add dates that should be provided in GMT
 	 * and localized version.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param       string     $key
 	 * @param       string|int $value
@@ -1499,7 +1499,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Sets the create args the repository will use to create posts.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string|int $image The path to an image file, an image URL, or an attachment post ID.
 	 *
@@ -1511,7 +1511,8 @@ abstract class Repository implements Repository_Interface {
 		} elseif ( 0 === $image || null === $image ) {
 			$thumbnail_id = '';
 		} else {
-			$thumbnail_id = tribe_upload_image( $image );
+			$uploader     = new Utils\Image_Uploader( $image );
+			$thumbnail_id = $uploader->upload_and_get_attachment_id();
 		}
 
 		if ( false === $thumbnail_id ) {
@@ -1595,7 +1596,7 @@ abstract class Repository implements Repository_Interface {
 	 * Filters the query to only return posts that are related, via a meta key, to posts
 	 * that satisfy a condition.
 	 *
-	 * @since 4.10.3
+	 * @since 1.0.0
 	 *
 	 * @throws Repository\Usage_Error If the comparison operator requires and no value provided.
 	 *
@@ -1723,7 +1724,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Adds an entry to the repository filter schema.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string   $key      The filter key, the one that will be used in `by` and `where`
 	 *                           calls.
@@ -1736,7 +1737,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Adds a simple meta entry to the repository filter schema.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string       $key      The filter key, the one that will be used in `by` and `where` calls.
 	 * @param string|array $meta_key The meta key(s) to use for the meta lookup.
@@ -1754,7 +1755,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Adds a simple taxonomy entry to the repository filter schema.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string       $key      The filter key, the one that will be used in `by` and `where` calls.
 	 * @param string|array $taxonomy The taxonomy/taxonomies to use for the tax lookup.
@@ -1779,7 +1780,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Returns modified query arguments after applying a default filter.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param      string $key
 	 * @param      mixed  $value
@@ -2006,7 +2007,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Builds a date query entry to get posts after a date.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $value
 	 * @param string $column
@@ -2041,7 +2042,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Builds a date query entry to get posts before a date.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $value
 	 * @param string $column
@@ -2076,7 +2077,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Builds a meta query entry.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string       $meta_key
 	 * @param string|array $meta_value
@@ -2155,7 +2156,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Generates a SQL friendly slug from the provided, variadic, fragments.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param ...string $frag
 	 *
@@ -2181,7 +2182,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Builds a taxonomy query entry.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string           $taxonomy
 	 * @param int|string|array $terms
@@ -2235,7 +2236,7 @@ abstract class Repository implements Repository_Interface {
 	 *
 	 * The return string includes opening and closing braces.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string|array $values One or more values to use to build
 	 *                             the interval
@@ -2263,7 +2264,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Prepares a single value to be used in a SQL query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param mixed  $value
 	 * @param string $format
@@ -2283,7 +2284,7 @@ abstract class Repository implements Repository_Interface {
 	 * This is just a wrap to signal this kind of code error not in bad SQL error but
 	 * with a visible exception.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string       $compare A SQL comparison operator
 	 * @param string|array $meta_key
@@ -2441,7 +2442,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Returns a map relating comparison operators to their "pretty" name.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -2459,12 +2460,12 @@ abstract class Repository implements Repository_Interface {
 		 * Filters the post delete operation allowing third party code to bail out of
 		 * the process completely.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param array|null $deleted An array containing the the IDs of the deleted posts.
 		 * @param self       $this    This repository instance.
 		 */
-		$deleted = apply_filters( "stellar_repository_{$this->filter_name}_delete", null, $to_delete );
+		$deleted = apply_filters( "stellarwp_helix_repository_{$this->filter_name}_delete", null, $to_delete );
 		if ( null !== $deleted ) {
 			return $deleted;
 		}
@@ -2476,9 +2477,11 @@ abstract class Repository implements Repository_Interface {
 
 			if ( empty( $done ) ) {
 				Utils\Log::log(
-					__( 'Could not delete post with ID ' . $id, 'tribe-common' ),
 					Utils\Log::WARNING,
-					$this->filter_name
+					$this->filter_name,
+					[
+						'message' => __( 'Could not delete post with ID ' . $id, 'stellarwp-helix' ),
+					]
 				);
 				continue;
 			}
@@ -2491,7 +2494,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Whether background delete is activated for the repository or not.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array $to_delete An array of post IDs to delete.
 	 *
@@ -2502,30 +2505,30 @@ abstract class Repository implements Repository_Interface {
 		 * Whether background, asynchronous, deletion of posts is active or not for all repositories.
 		 *
 		 * If active then if the number of posts to delete is over the threshold, defined
-		 * by the `stellar_repository_delete_background_threshold` filter, then the deletion will happen
+		 * by the `stellarwp_helix_repository_delete_background_threshold` filter, then the deletion will happen
 		 * in background in other requests.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param bool  $background_active Whether background deletion is active or not.
 		 * @param array $to_delete         The array of post IDs to delete.
 		 */
-		$background_active = (bool) apply_filters( 'stellar_repository_delete_background_activated', true, $to_delete );
+		$background_active = (bool) apply_filters( 'stellarwp_helix_repository_delete_background_activated', true, $to_delete );
 
 		/**
 		 * Whether background, asynchronous, deletion of posts is active or not for this specific repository.
 		 *
 		 * If active then if the number of posts to delete is over the threshold, defined
-		 * by the `stellar_repository_delete_background_threshold` filter, then the deletion will happen
+		 * by the `stellarwp_helix_repository_delete_background_threshold` filter, then the deletion will happen
 		 * in background in other requests.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param bool  $background_active Whether background deletion is active or not.
 		 * @param array $to_delete         The array of post IDs to delete.
 		 */
 		$background_active = (bool) apply_filters(
-			"stellar_repository_{$this->filter_name}_delete_background_activated",
+			"stellarwp_helix_repository_{$this->filter_name}_delete_background_activated",
 			$background_active,
 			$to_delete
 		);
@@ -2536,7 +2539,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Returns the threshold above which posts will be deleted in background.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array $to_delete An array of post IDs to delete.
 	 *
@@ -2546,29 +2549,29 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * The number of posts above which the deletion will happen in background.
 		 *
-		 * This filter will be ignored if background delete is deactivated with the `stellar_repository_delete_background_activated`
-		 * or `stellar_repository_{$this->filter_name}_delete_background_activated` filter.
+		 * This filter will be ignored if background delete is deactivated with the `stellarwp_helix_repository_delete_background_activated`
+		 * or `stellarwp_helix_repository_{$this->filter_name}_delete_background_activated` filter.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param int The threshold over which posts will be deleted in background.
 		 * @param array $to_delete The post IDs to delete.
 		 */
-		$background_threshold = (int) apply_filters( 'stellar_repository_delete_background_threshold', 20, $to_delete );
+		$background_threshold = (int) apply_filters( 'stellarwp_helix_repository_delete_background_threshold', 20, $to_delete );
 
 		/**
 		 * The number of posts above which the deletion will happen in background.
 		 *
-		 * This filter will be ignored if background delete is deactivated with the `stellar_repository_delete_background_activated`
-		 * or `stellar_repository_{$this->filter_name}_delete_background_activated` filter.
+		 * This filter will be ignored if background delete is deactivated with the `stellarwp_helix_repository_delete_background_activated`
+		 * or `stellarwp_helix_repository_{$this->filter_name}_delete_background_activated` filter.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param int The threshold over which posts will be deleted in background.
 		 * @param array $to_delete The post IDs to delete.
 		 */
 		$background_threshold = (int) apply_filters(
-			"stellar_repository_{$this->filter_name}_delete_background_threshold",
+			"stellarwp_helix_repository_{$this->filter_name}_delete_background_threshold",
 			$background_threshold,
 			$to_delete
 		);
@@ -2579,7 +2582,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Whether background update is activated for the repository or not.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array $to_update An array of post IDs to update.
 	 *
@@ -2590,30 +2593,30 @@ abstract class Repository implements Repository_Interface {
 		 * Whether background, asynchronous, update of posts is active or not for all repositories.
 		 *
 		 * If active then if the number of posts to update is over the threshold, defined
-		 * by the `stellar_repository_update_background_threshold` filter, then the update will happen
+		 * by the `stellarwp_helix_repository_update_background_threshold` filter, then the update will happen
 		 * in background in other requests.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param bool  $background_active Whether background update is active or not.
 		 * @param array $to_update         The array of post IDs to update.
 		 */
-		$background_active = (bool) apply_filters( 'stellar_repository_update_background_activated', true, $to_update );
+		$background_active = (bool) apply_filters( 'stellarwp_helix_repository_update_background_activated', true, $to_update );
 
 		/**
 		 * Whether background, asynchronous, update of posts is active or not for this specific repository.
 		 *
 		 * If active then if the number of posts to update is over the threshold, defined
-		 * by the `stellar_repository_update_background_threshold` filter, then the update will happen
+		 * by the `stellarwp_helix_repository_update_background_threshold` filter, then the update will happen
 		 * in background in other requests.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param bool  $background_active Whether background update is active or not.
 		 * @param array $to_update         The array of post IDs to update.
 		 */
 		$background_active = (bool) apply_filters(
-			"stellar_repository_{$this->filter_name}_update_background_activated",
+			"stellarwp_helix_repository_{$this->filter_name}_update_background_activated",
 			$background_active,
 			$to_update
 		);
@@ -2624,7 +2627,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Returns the threshold above which posts will be updated in background.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array $to_update An array of post IDs to update.
 	 *
@@ -2634,29 +2637,29 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * The number of posts above which the update will happen in background.
 		 *
-		 * This filter will be ignored if background update is deactivated with the `stellar_repository_update_background_activated`
-		 * or `stellar_repository_{$this->filter_name}_update_background_activated` filter.
+		 * This filter will be ignored if background update is deactivated with the `stellarwp_helix_repository_update_background_activated`
+		 * or `stellarwp_helix_repository_{$this->filter_name}_update_background_activated` filter.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param int The threshold over which posts will be updated in background.
 		 * @param array $to_update The post IDs to update.
 		 */
-		$background_threshold = (int) apply_filters( 'stellar_repository_update_background_threshold', 20, $to_update );
+		$background_threshold = (int) apply_filters( 'stellarwp_helix_repository_update_background_threshold', 20, $to_update );
 
 		/**
 		 * The number of posts above which the update will happen in background.
 		 *
-		 * This filter will be ignored if background update is deactivated with the `stellar_repository_update_background_activated`
-		 * or `stellar_repository_{$this->filter_name}_update_background_activated` filter.
+		 * This filter will be ignored if background update is deactivated with the `stellarwp_helix_repository_update_background_activated`
+		 * or `stellarwp_helix_repository_{$this->filter_name}_update_background_activated` filter.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param int The threshold over which posts will be updated in background.
 		 * @param array $to_update The post IDs to update.
 		 */
 		$background_threshold = (int) apply_filters(
-			"stellar_repository_{$this->filter_name}_update_background_threshold",
+			"stellarwp_helix_repository_{$this->filter_name}_update_background_threshold",
 			$background_threshold,
 			$to_update
 		);
@@ -2667,7 +2670,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Returns the delete callback function or method to use to delete posts.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param      int|array $to_delete  The post ID to delete or an array of post IDs to delete.
 	 * @param bool           $background Whether the callback will be used in background delete operations or not.
@@ -2678,7 +2681,7 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * Filters the callback that all repositories should use to delete posts.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param callable  $callback   The callback that should be used to delete each post; defaults
 		 *                              to `wp_delete_post`; falsy return values will be interpreted as
@@ -2686,12 +2689,12 @@ abstract class Repository implements Repository_Interface {
 		 * @param array|int $to_delete  An array of post IDs to delete.
 		 * @param bool      $background Whether the delete operation will happen in background or not.
 		 */
-		$callback = apply_filters( 'stellar_repository_delete_callback', 'wp_delete_post', (array) $to_delete, (bool) $background );
+		$callback = apply_filters( 'stellarwp_helix_repository_delete_callback', 'wp_delete_post', (array) $to_delete, (bool) $background );
 
 		/**
 		 * Filters the callback that all repositories should use to delete posts.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param callable  $callback   The callback that should be used to delete each post; defaults
 		 *                              to `wp_delete_post`; falsy return values will be interpreted as
@@ -2700,7 +2703,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param bool      $background Whether the delete operation will happen in background or not.
 		 */
 		$callback = apply_filters(
-			"stellar_repository_{$this->filter_name}_delete_callback",
+			"stellarwp_helix_repository_{$this->filter_name}_delete_callback",
 			$callback,
 			(array) $to_delete,
 			(bool) $background
@@ -2719,7 +2722,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Returns the update callback function or method to use to update posts.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param      int|array $to_update  The post ID to update or an array of post IDs to update.
 	 * @param bool           $background Whether the callback will be used in background update operations or not.
@@ -2730,7 +2733,7 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * Filters the callback that all repositories should use to update posts.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param callable  $callback   The callback that should be used to update each post; defaults
 		 *                              to `wp_update_post`; falsy return values will be interpreted as
@@ -2738,12 +2741,12 @@ abstract class Repository implements Repository_Interface {
 		 * @param array|int $to_update  An array of post IDs to update.
 		 * @param bool      $background Whether the update operation will happen in background or not.
 		 */
-		$callback = apply_filters( 'stellar_repository_update_callback', 'wp_update_post', (array) $to_update, (bool) $background );
+		$callback = apply_filters( 'stellarwp_helix_repository_update_callback', 'wp_update_post', (array) $to_update, (bool) $background );
 
 		/**
 		 * Filters the callback that all repositories should use to update posts.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param callable  $callback   The callback that should be used to update each post; defaults
 		 *                              to `wp_update_post`; falsy return values will be interpreted as
@@ -2752,7 +2755,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param bool      $background Whether the update operation will happen in background or not.
 		 */
 		$callback = apply_filters(
-			"stellar_repository_{$this->filter_name}_update_callback",
+			"stellarwp_helix_repository_{$this->filter_name}_update_callback",
 			$callback,
 			(array) $to_update,
 			(bool) $background
@@ -2782,12 +2785,12 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * Filters the post array that will be used for an update.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param array $postarr The post array that will be sent to the update callback.
 		 * @param int The post ID if set.
 		 */
-		return apply_filters( "stellar_repository_{$this->filter_name}_update_postarr", $postarr, $post_id );
+		return apply_filters( "stellarwp_helix_repository_{$this->filter_name}_update_postarr", $postarr, $post_id );
 	}
 
 	/**
@@ -2795,7 +2798,7 @@ abstract class Repository implements Repository_Interface {
 	 *
 	 * Usage: `set_error_handler( array( $repository, 'cast_error_to_exception' ) );
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param int $code The error code.
 	 * @param string $message The error message.
@@ -2830,11 +2833,11 @@ abstract class Repository implements Repository_Interface {
 		  * Filters the post array that will be used for the creation of a post
 		  * of the type managed by the repository.
 		  *
-		  * @since 4.9.5
+		  * @since 1.0.0
 		  *
 		  * @param array $postarr The post array that will be sent to the create callback.
 		  */
-		 return apply_filters( "stellar_repository_{$this->filter_name}_update_postarr", $postarr );
+		 return apply_filters( "stellarwp_helix_repository_{$this->filter_name}_update_postarr", $postarr );
 	}
 
 	/**
@@ -2893,7 +2896,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Returns the create callback function or method to use to create posts.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array    $postarr     The post array that will be used for the creation.
 	 *
@@ -2903,19 +2906,19 @@ abstract class Repository implements Repository_Interface {
 		/**
 		 * Filters the callback that all repositories should use to create posts.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param callable $callback    The callback that should be used to create posts; defaults
 		 *                              to `wp_insert_post`; non numeric and existing post ID return
 		 *                              values will be interpreted as failures to create the post.
 		 * @param array    $postarr     The post array that will be used for the creation.
 		 */
-		$callback = apply_filters( 'stellar_repository_create_callback', 'wp_insert_post', $postarr );
+		$callback = apply_filters( 'stellarwp_helix_repository_create_callback', 'wp_insert_post', $postarr );
 
 		/**
 		 * Filters the callback that all repositories should use to create posts.
 		 *
-		 * @since 4.9.5
+		 * @since 1.0.0
 		 *
 		 * @param callable $callback    The callback that should be used to create posts; defaults
 		 *                              to `wp_insert_post`; non numeric and existing post ID return
@@ -2923,7 +2926,7 @@ abstract class Repository implements Repository_Interface {
 		 * @param array    $postarr     The post array that will be used for the creation.
 		 */
 		$callback = apply_filters(
-			"stellar_repository_{$this->filter_name}_create_callback",
+			"stellarwp_helix_repository_{$this->filter_name}_create_callback",
 			$callback,
 			$postarr
 		);
@@ -2934,7 +2937,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Returns the create args the repository will use to create posts.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return array The create args the repository will use to create posts.
 	 */
@@ -2945,7 +2948,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Sets the create args the repository will use to create posts.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array $create_args The create args the repository will use to create posts.
 	 */
@@ -2957,7 +2960,7 @@ abstract class Repository implements Repository_Interface {
 	 * Returns a value trying to fetch it from an array first and then
 	 * reading it from the meta.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array    $postarr The array to look into.
 	 * @param string   $key     The key to retrieve.
@@ -3040,7 +3043,7 @@ abstract class Repository implements Repository_Interface {
 	 * {@inheritdoc}
 	 */
 	public function collect() {
-		return new Tribe__Utils__Post_Collection( $this->all() );
+		return new Utils\Post_Collection( $this->all() );
 	}
 
 	/**
@@ -3049,7 +3052,7 @@ abstract class Repository implements Repository_Interface {
 	 * Allow classes extending or decorating the repository to act before
 	 * the query is built or replace its building completely.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return WP_Query|null A built query object or `null` if the builder failed or bailed.
 	 */
@@ -3068,7 +3071,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Builds the ORM query internally, without a query builder.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return \WP_Query The built query object.
 	 */
@@ -3101,19 +3104,19 @@ abstract class Repository implements Repository_Interface {
 		 * @param WP_Query $query      The query object, the query arguments have not been parsed yet.
 		 * @param          $this       $this This repository instance
 		 */
-		$query_args = apply_filters( "stellar_repository_{$this->filter_name}_query_args", $query_args, $query, $this );
+		$query_args = apply_filters( "stellarwp_helix_repository_{$this->filter_name}_query_args", $query_args, $query, $this );
 
 		/**
 		 * Provides a last-ditch effort to override the filtered offset.
 		 *
 		 * This should only be used if doing creating pagination for performance purposes.
 		 *
-		 * @since 4.11.0
+		 * @since 1.0.0
 		 *
 		 * @param null|int $filtered_offset Offset parameter setting.
 		 * @param array    $query_args      List of query arguments.
 		 */
-		$filtered_offset = apply_filters( 'stellar_repository_query_arg_offset_override', null, $query_args );
+		$filtered_offset = apply_filters( 'stellarwp_helix_repository_query_arg_offset_override', null, $query_args );
 
 		if ( $filtered_offset || isset( $query_args['offset'] ) ) {
 			$per_page = (int) Arr::get( $query_args, 'posts_per_page', get_option( 'posts_per_page' ) );
@@ -3215,7 +3218,7 @@ abstract class Repository implements Repository_Interface {
 	 *
 	 * Allowed values are 'OR' and 'AND'.
 	 *
-	 * @since 4.9.6
+	 * @since 1.0.0
 	 *
 	 * @param string $relation The relation to check.
 	 *
@@ -3232,7 +3235,7 @@ abstract class Repository implements Repository_Interface {
 	 *
 	 * If no leading and trailing `%` was found it will be added at the start and end of the string.
 	 *
-	 * @since 4.9.6
+	 * @since 1.0.0
 	 *
 	 * @param string|array $value The string to prepare or an array of strings to prepare.
 	 *
@@ -3271,7 +3274,7 @@ abstract class Repository implements Repository_Interface {
 	 *
 	 * This method is table-agnostic. While flexible it will also require some care to be used.
 	 *
-	 * @since 4.9.6
+	 * @since 1.0.0
 	 *
 	 * @param string|array $fields  One or more fields to build the clause for.
 	 * @param string       $compare The comparison operator to use to build the
@@ -3332,7 +3335,7 @@ abstract class Repository implements Repository_Interface {
 	 *
 	 * This should be used to break-down a query and fetch term IDs, to then use in a "lighter" join, later.
 	 *
-	 * @since 4.9.6
+	 * @since 1.0.0
 	 *
 	 * @param string|array $taxonomy The taxonomy, or taxonomies, to fetch the terms for.
 	 * @param string $compare The comparison operator to use, e.g. 'LIKE' or '=>'.
@@ -3525,7 +3528,7 @@ abstract class Repository implements Repository_Interface {
 
 			if ( 'AND' === $where_relation || ! empty( $matching_term_ids ) ) {
 				// Let's not add WHERE and JOIN clauses if there is nothing to add.
-				$tt_alias = 'stellar_tt_' . self::$alias_counter ++;
+				$tt_alias = 'stellarwp_helix_tt_' . self::$alias_counter ++;
 				$this->filter_query->join(
 					"JOIN {$wpdb->term_relationships} {$tt_alias} ON {$wpdb->posts}.ID = {$tt_alias}.object_id"
 				);
@@ -3535,7 +3538,7 @@ abstract class Repository implements Repository_Interface {
 		}
 
 		if ( ! empty( $custom_fields ) ) {
-			$meta_alias = 'stellar_meta_' . self::$alias_counter ++;
+			$meta_alias = 'stellarwp_helix_meta_' . self::$alias_counter ++;
 
 			$custom_fields = array_map( static function ( $custom_field ) use ( $wpdb, $meta_alias ) {
 				return $wpdb->prepare(
@@ -3593,7 +3596,7 @@ abstract class Repository implements Repository_Interface {
 	/**
 	 * Flush current filters and query information.
 	 *
-	 * @since 4.9.10
+	 * @since 1.0.0
 	 *
 	 * @return self
 	 */

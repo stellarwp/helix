@@ -273,7 +273,7 @@ class Timezones {
 	 *
 	 * @todo revise to eliminate all of these: maybe_get_tz_name, apply_offset, timezone_from_utc_offset, and adjust_timestamp
 	 *
-	 * @since 4.6.3
+	 * @since 1.0.0
 	 *
 	 * @param string $utc_offset_string
 	 *
@@ -368,7 +368,7 @@ class Timezones {
 	/**
 	 * Try to figure out the Timezone name base on offset
 	 *
-	 * @since  4.0.7
+	 * @since  1.0.0
 	 *
 	 * @todo revise to eliminate all of these: maybe_get_tz_name, apply_offset, timezone_from_utc_offset, and adjust_timestamp
 	 *

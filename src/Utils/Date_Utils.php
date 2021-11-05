@@ -40,7 +40,7 @@ class Date_Utils {
 	/**
 	 * Builds a date object from a given datetime and timezone.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string|DateTime|int      $datetime      A `strtotime` parse-able string, a DateTime object or
 	 *                                                a timestamp; defaults to `now`.
@@ -77,7 +77,9 @@ class Date_Utils {
 				return new Date_I18n( '@' . $datetime, $timestamp_timezone );
 			}
 
-			set_error_handler( 'tribe_catch_and_throw' );
+			set_error_handler( static function( $errstr, $errno ) {
+				throw new \RuntimeException( $errstr, $errno );
+			} );
 			$date = new Date_I18n( $datetime, $timezone_object );
 			restore_error_handler();
 		} catch ( \Exception $e ) {
@@ -101,7 +103,7 @@ class Date_Utils {
 	 *
 	 * It's the immutable version of the `Date_Utils::build_date_object` method.
 	 *
-	 * @since 4.10.2
+	 * @since 1.0.0
 	 *
 	 * @param string|DateTime|int      $datetime      A `strtotime` parse-able string, a DateTime object or
 	 *                                                a timestamp; defaults to `now`.
@@ -150,7 +152,7 @@ class Date_Utils {
 	 *
 	 * An alias of the `Date_Utils::build_date_object` function.
 	 *
-	 * @since 4.10.2
+	 * @since 1.0.0
 	 *
 	 * @param string|DateTime|int      $datetime      A `strtotime` parse-able string, a DateTime object or
 	 *                                                a timestamp; defaults to `now`.

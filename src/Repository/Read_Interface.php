@@ -7,7 +7,7 @@ use StellarWP\Helix\Repository\Core_Read_Interface;
  * Interface Read_Interface
  *
  *
- * @since 4.7.19
+ * @since 1.0.0
  */
 interface Read_Interface extends Setter_Interface, Core_Read_Interface {
 	/**
@@ -37,7 +37,7 @@ interface Read_Interface extends Setter_Interface, Core_Read_Interface {
 	/**
 	 * Returns the Read repository built WP_Query object.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @return WP_Query
 	 */
@@ -47,7 +47,7 @@ interface Read_Interface extends Setter_Interface, Core_Read_Interface {
 	 * Whether the current READ query will apply a specific `by` (or `where`)
 	 * filter or not.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $key
 	 * @param null $value If provided an ulterior check will be made to see if
@@ -62,7 +62,7 @@ interface Read_Interface extends Setter_Interface, Core_Read_Interface {
 	/**
 	 * What filter the current READ query is currently applying in a specific `by` (or `where`).
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return string|null The current filter being applied.
 	 */
@@ -85,7 +85,7 @@ interface Read_Interface extends Setter_Interface, Core_Read_Interface {
 	 * be in: e.g. in a month view or week view for events.
 	 * Extending classes can support more display contexts.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string $context A display context supported by the repository; defaults to `default`.
 	 *
@@ -102,7 +102,7 @@ interface Read_Interface extends Setter_Interface, Core_Read_Interface {
 	 * rendered within a widget and so on.
 	 * Extending classes can support more render contexts.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string $context A display context supported by the repository; defaults to `default`.
 	 *
@@ -119,7 +119,7 @@ interface Read_Interface extends Setter_Interface, Core_Read_Interface {
 	 * The advantage over doing `$repository->where( 'post__in' , $ids )->get_query()` is
 	 * to avoid all the overhead of a query that, probably did run already.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array $posts An array of post objects or post IDs the query should return as if fetched.
 	 *

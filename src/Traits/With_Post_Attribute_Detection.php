@@ -5,7 +5,7 @@
  * Note that the trait does not include a `is_a_custom_field` method as that's implied from a field not being
  * a post field and not being a taxonomy.
  *
- * @since   4.12.6
+ * @since   1.0.0
  *
  * @package StellarWP\Helix\Traits
  */
@@ -15,7 +15,7 @@ namespace StellarWP\Helix\Traits;
 /**
  * Trait With_Post_Attribute_Detection
  *
- * @since   4.12.6
+ * @since   1.0.0
  *
  * @package StellarWP\Helix\Traits
  */
@@ -58,6 +58,8 @@ trait With_Post_Attribute_Detection {
 
 	/**
 	 * Whether the current key identifies one of the supported taxonomies or not.
+	 * 
+	 * @since 1.0.0
 	 *
 	 * @param string $key The field to check.
 	 *

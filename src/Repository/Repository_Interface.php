@@ -4,7 +4,7 @@ namespace StellarWP\Helix\Repository;
 /**
  * Interface Interface
  *
- * @since 4.7.19
+ * @since 1.0.0
  *
  */
 interface Repository_Interface extends Read_Interface, Update_Interface {
@@ -15,7 +15,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Returns the current default query arguments of the repository.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -24,7 +24,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Sets the default arguments of the repository.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param array $default_args
 	 *
@@ -45,7 +45,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Returns the repository filter name.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -54,7 +54,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Sets the formatter in charge of formatting items to the correct format.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param Formatter_Interface $formatter
 	 */
@@ -64,7 +64,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Build, without initializing it, the query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param bool $use_query_builder Whether to use the query builder, if set, or not.
 	 *
@@ -75,7 +75,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Adds a custom JOIN clause to the query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $join
 	 */
@@ -84,7 +84,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Adds a custom WHERE clause to the query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string $where
 	 */
@@ -93,7 +93,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Sets the object in charge of building and returning the query.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param mixed $query_builder
 	 *
@@ -125,7 +125,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	 * Filters the query to return posts that have got a number or posts
 	 * related to them by meta at least equal to a value.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string|array $by_meta_keys One or more `meta_keys` relating
 	 *                                   another post TO this post type.
@@ -145,7 +145,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	 * Filters the query to return posts that have got a number or posts
 	 * related to them by meta at most equal to a value.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string|array $by_meta_keys One or more `meta_keys` relating
 	 *                                   another post TO this post type.
@@ -166,7 +166,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	 * Filters the query to return posts that have got a number or posts
 	 * related to them by meta between two values.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string|array $by_meta_keys One or more `meta_keys` relating
 	 *                                   another post TO this post type.
@@ -188,7 +188,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Adds an entry to the repository filter schema.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string   $key      The filter key, the one that will be used in `by` and `where`
 	 *                           calls.
@@ -204,7 +204,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	 * The possibility to include the query in the hash generation is required as the query vars could
 	 * be further modified after the repository filters are applied and the query is built.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array          $settings An array of settings to define how the hash should be produced in the shape
 	 *                                 `[ 'exclude' => [ 'ex_1', ... ], 'include' => [ 'inc_1', ... ] ]`. This array
@@ -219,7 +219,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Returns the data the repository would use to build the hash.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param array          $settings An array of settings to define how the hash should be produced in the shape
 	 *                                 `[ 'exclude' => [ 'ex_1', ... ], 'include' => [ 'inc_1', ... ] ]`. This array
@@ -233,7 +233,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Returns the last built query from the repository instance.
 	 *
-	 * @since 4.9.6
+	 * @since 1.0.0
 	 *
 	 * @return WP_Query|null The last built query instance if any.
 	 */
@@ -242,7 +242,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Builds, and adds to the query, a WHERE clause to the query on multiple fields.
 	 *
-	 * @since 4.9.6
+	 * @since 1.0.0
 	 *
 	 * @param array  $fields         The fields to add WHERE clauses for. The fields can be post fields, custom fields or
 	 *                               taxonomy terms.
@@ -264,7 +264,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	 *
 	 * Setting a query explicitly
 	 *
-	 * @since 4.9.9
+	 * @since 1.0.0
 	 *
 	 * @param  \WP_Query  $query An query instance.
 	 *
@@ -279,7 +279,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	 * Mind that this method will always return a Repository instance, no matter if a next page exists or not.
 	 * If a next page does not exist then the instance returned by this method will yield no posts and a count of `0`.
 	 *
-	 * @since 4.9.11
+	 * @since 1.0.0
 	 *
 	 * @return Interface The repository instance that will yield the next page results.
 	 */
@@ -292,7 +292,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	 * If a previous page does not exist then the instance returned by this method will yield no posts and a count
 	 * of `0`.
 	 *
-	 * @since 4.9.11
+	 * @since 1.0.0
 	 *
 	 * @return Interface The repository instance that will yield the previous page results.
 	 */
@@ -301,7 +301,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Sets the found rows calculation to be enabled for queries.
 	 *
-	 * @since 4.9.10
+	 * @since 1.0.0
 	 *
 	 * @param bool $found_rows Whether found rows calculation should be enabled.
 	 *
@@ -312,7 +312,7 @@ interface Repository_Interface extends Read_Interface, Update_Interface {
 	/**
 	 * Voids the repositories queries preventing the repository from running any query.
 	 *
-	 * @since 4.9.14
+	 * @since 1.0.0
 	 *
 	 * @param bool $void Whether to void the repository queries or not.
 	 *

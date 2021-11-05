@@ -4,18 +4,18 @@ namespace StellarWP\Helix\Repository;
 /**
  * Class Usage_Error
  *
- * @since 4.7.19
+ * @since 1.0.0
  *
  * Thrown to indicate an error in the repository usage by a developer; this
  * is meant to be used to help developers to use the repository.
  */
-class Usage_Error extends Exception {
+class Usage_Error extends \Exception {
 
 	/**
 	 * Do not ally dynamic set of properties on the repository; protected
 	 * properties are read-only.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string                       $name   The name of the property the client code is trying to set.
 	 * @param Interface $object The instance of the repository.
@@ -34,7 +34,7 @@ class Usage_Error extends Exception {
 	 * This is to allow for more clear comprehension of errors related to
 	 * missing filters.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string                       $key    The filter the client code is trying to use.
 	 * @param Interface $object The instance of the repository.
@@ -50,7 +50,7 @@ class Usage_Error extends Exception {
 	/**
 	 * Indicates that a property is not defined on the repository.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string                       $name The name of the property the client code is trying to read.
 	 * @param Interface $object
@@ -66,7 +66,7 @@ class Usage_Error extends Exception {
 	/**
 	 * Indicates that a field cannot be updated by the repository class.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string                              $key
 	 * @param Update_Interface $object
@@ -83,7 +83,7 @@ class Usage_Error extends Exception {
 	 * "Sugar" method to correct a typo in a public method name.
 	 * Indicates that the `set` method of the Update repository is being used incorrectly.
 	 *
-	 * @since 4.12.6
+	 * @since 1.0.0
 	 *
 	 * @TODO: perhaps we should deprecate this at some point?
 	 *
@@ -98,7 +98,7 @@ class Usage_Error extends Exception {
 	/**
 	 * Indicates that the `set` method of the Update repository is being used incorrectly.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param Update_Interface $object
 	 *
@@ -113,7 +113,7 @@ class Usage_Error extends Exception {
 	/**
 	 * Indicates that the client code is trying to use a single comparison operator with multiple values.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string|array $key
 	 * @param array  $value
@@ -134,7 +134,7 @@ class Usage_Error extends Exception {
 	 * Indicates that the client code is calling the query building method without
 	 * providing all the arguments the comparison operator requires.
 	 *
-	 * @since 4.7.19
+	 * @since 1.0.0
 	 *
 	 * @param string|array $key
 	 * @param string       $compare
@@ -198,7 +198,7 @@ class Usage_Error extends Exception {
 	/**
 	 * Indicates that the client code is trying to use a comparison operator not supported by a specific filter.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string $operator The not supported comparison operator.
 	 * @param string $filter   The filter in which the client code is trying to use the current operator.
@@ -213,7 +213,7 @@ class Usage_Error extends Exception {
 	 * Indicates that the client code is trying to use a comparison operator that requires a value of a specific type
 	 * wrong.
 	 *
-	 * @since 4.9.5
+	 * @since 1.0.0
 	 *
 	 * @param string $operator The operator the client code is using.
 	 * @param string $filter   The filter the client code is using.
@@ -228,7 +228,7 @@ class Usage_Error extends Exception {
 	/**
 	 * Indicates that the client code is trying to use a comparison operator that is not valid..
 	 *
-	 * @since 4.9.6
+	 * @since 1.0.0
 	 *
 	 * @param string $operator The not supported comparison operator.
 	 *
@@ -241,7 +241,7 @@ class Usage_Error extends Exception {
 	/**
 	 * Indicates that the client code is trying to use a relation that is not valid..
 	 *
-	 * @since 4.9.6
+	 * @since 1.0.0
 	 *
 	 * @param string $relation The not supported relation.
 	 *
@@ -254,7 +254,7 @@ class Usage_Error extends Exception {
 	/**
 	 * Indicates that the client code is trying to set a query on the repository after the query ran.
 	 *
-	 * @since 4.9.9
+	 * @since 1.0.0
 	 *
 	 * @return Usage_Error A ready to throw instance of the class.
 	 */
@@ -265,7 +265,7 @@ class Usage_Error extends Exception {
 	/**
 	 * Indicates the client code is trying to call a filter without the correct number of req. parameters.
 	 *
-	 * @since 4.10.2
+	 * @since 1.0.0
 	 *
 	 * @param string $filter        The called filter.
 	 * @param array  $required_args The human-readable name of the required arguments.
@@ -286,7 +286,7 @@ class Usage_Error extends Exception {
 	/**
 	 * Indicates the client code is trying to call a filter with an invalid parameter.
 	 *
-	 * @since 4.10.2
+	 * @since 1.0.0
 	 *
 	 * @param string $filter   The called filter.
 	 * @param string $arg_name The human-readable name of the parameter.
