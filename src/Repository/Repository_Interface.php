@@ -1,6 +1,8 @@
 <?php
 namespace StellarWP\Helix\Repository;
 
+use WP_Query;
+
 /**
  * Interface Interface
  *

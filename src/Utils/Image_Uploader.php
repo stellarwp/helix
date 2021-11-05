@@ -1,6 +1,8 @@
 <?php
 namespace StellarWP\Helix\Utils;
 
+use WP_Post;
+
 class Image_Uploader {
 	/**
 	 * Original URLs cache.
